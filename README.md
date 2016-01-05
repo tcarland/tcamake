@@ -1,8 +1,8 @@
-  **tcamake** README
-  ==============
+tcamake
+=======
 
-  author  tcarland@gmail.com  
-  version 20151130
+***Author***  tcarland@gmail.com  
+***Version*** 20151130
 
 
 ### Overview:
