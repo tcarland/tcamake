@@ -1,0 +1,53 @@
+# tcamake/autodepend
+#
+#   This file is included internally and should not need to edited.
+#
+#   Timothy C. Arland <tcarland@gmail.com>
+#
+#------------------------------------------------------------------------
+#  Do not edit below this line unless prepared to deal with the breakage.
+#------------------------------------------------------------------------
+ifndef TCAMAKE_AUTODEPEND
+  TCAMAKE_AUTODEPEND=1
+endif
+
+%.o: %.cc
+	$(CXX) -o $@ -c $(CPPFLAGS) $(CFLAGS) $<
+%.o: %.cpp
+	$(CXX) -o $@ -c $(CPPFLAGS) $(CFLAGS) $<
+%.o: %.c
+	$(CC) -o $@ -c $(CPPFLAGS) $(CFLAGS) $<
+%.o: %.S
+	$(CC) -o $@ -c $(CPPFLAGS) $(CFLAGS) $<
+
+%.to: %.cc
+	$(CXX) -o $@ -c $(CPPFLAGS) $(CPPFLAGS_THR) $(CFLAGS) $<
+%.to: %.cpp
+	$(CXX) -o $@ -c $(CPPFLAGS) $(CPPFLAGS_THR) $(CFLAGS) $<
+%.to: %.c
+	$(CC) -o $@ -c $(CPPFLAGS) $(CPPFLAGS_THR) $(CFLAGS) $<
+%.to: %.S
+	$(CC) -o $@ -c $(CPPFLAGS) $(CPPFLAGS_THR) $(CFLAGS) $<
+
+
+make-cbin-rule   = $(CC) -o $@ $(CFLAGS) $^ $(LFLAGS) $(LIBS)
+make-cxxbin-rule = $(CXX) -o $@ $(CFLAGS) $(CXXFLAGS) $^ $(LFLAGS) $(LIBS)
+make-so-rule     = $(CC) -shared -o $@ $(CCSHARED) $(CFLAGS) $^ $(LFLAGS) $(LIBS)
+make-lib-rule    = ld -r -o $@ $^; 
+
+
+ifdef L_TARGET
+$(L_TARGET): $(L_OBJS)
+	ar cr $@ $(L_OBJS)
+endif
+
+ifdef T_TARGETS
+$(T_TARGETS): $(T_TARGETS:=.o) $(L_TARGET)
+	$(CC) $(CFLAGS) -o $@ $(@:=.o) $(L_TARGET) $(LFLAGS) $(LIBS)
+endif
+
+ifdef TXX_TARGETS
+$(TXX_TARGETS): $(TXX_TARGETS:=.o) $(L_TARGET)
+	$(CXX) $(CFLAGS) -o $@ $(@:=.o) $(L_TARGET) $(LFLAGS) $(LIBS)
+endif
+

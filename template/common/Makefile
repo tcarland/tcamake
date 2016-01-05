@@ -1,0 +1,23 @@
+# common top-level Makefile
+#
+
+all: libproject
+
+
+.PHONY: libproject
+libproject:
+	( cd libproject; make all )
+	@echo
+
+clean:
+	( cd libproject; make clean )
+	@echo
+
+distclean:
+	( cd libproject; make distclean )
+	@echo
+
+install:
+	( cd libproject; make install )
+	@echo
+

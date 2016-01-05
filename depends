@@ -1,0 +1,271 @@
+# depends
+#
+#  This file is typically site customized for internal projects and dependencies.
+
+ifndef TCAMAKE_PROJECT_DEPENDS
+  TCAMAKE_PROJECT_DEPENDS=1
+endif
+
+# Global defines and compile options
+ifndef TCAMAKE_DEPENDS
+  include $(TOPDIR)/tcamake/tcamake_depends
+endif
+
+#-------------------------------------------------------------------------
+#   Defined requirements below
+#-------------------------------------------------------------------------
+
+ifdef NEED_LIBPCAP
+  LIBS  += -lpcap
+endif
+
+ifdef NEED_ZLIB_INCLUDE
+  INCLUDES += -I$/usrinclude/zlib
+endif
+
+ifdef NEED_LIBXML2_INCLUDE
+  INCLUDES += -I/usr/include/libxml2
+endif
+
+ifdef NEED_OPENSSL
+  CFLAGS   += -DWITH_OPENSSL
+  LIBS     += -lssl -lcrypto
+  #LIBS     += -Wl,-Bstatic -lssl -lcrypto -Wl,-Bdynamic
+endif
+
+
+ifdef NEED_TCAXMLPP
+ifdef TCAMAKE_PROJECT
+    TCAXML_HOME = $(TOPDIR)/common/tcaxmlpp
+    INCLUDES   += -I$(TCAXML_HOME)/include
+else
+    TCAXML_HOME = /usr
+    INCLUDES   += -I$(TCAXML_HOME)/include/tcaxmlpp
+endif
+  LFLAGS += -L$(TCAXML_HOME)/lib
+  LIBS   += -ltcaxmlpp
+endif
+
+
+ifdef NEED_TCANETPP_INCLUDE
+ifdef TCAMAKE_PROJECT
+    INCLUDES += -I$(TOPDIR)/common/tcanetpp/include
+else
+    INCLUDES += -I/usr/include/tcanetpp
+endif
+endif
+
+
+ifdef NEED_TCANETPP
+ifdef TCAMAKE_PROJECT
+    TCANETPP_HOME = $(TOPDIR)/common/tcanetpp
+    INCLUDES     += -I$(TCANETPP_HOME)/include
+else
+    TCANETPP_HOME = /usr
+    INCLUDES     += -I$(TCANETPP_HOME)/include/tcanetpp
+endif
+  LFLAGS += -L$(TCANETPP_HOME)/lib
+  LIBS   += -ltcanetpp
+endif
+
+
+ifdef NEED_TCACMDBUF
+ifdef TCAMAKE_PROJECT
+    TCANETPP_HOME = $(TOPDIR)/common/tcanetpp
+    INCLUDES     += -I$(TCANETPP_HOME)/include
+else
+    TCANETPP_HOME = /usr
+    INCLUDES     += -I$(TCANETPP_HOME)/include/tcanetpp
+endif
+  LFLAGS += -L$(TCANETPP_HOME)/lib
+  LIBS   += -lcmdbuf
+endif
+
+
+ifdef NEED_TCASQLPP
+ifdef TCAMAKE_PROJECT
+    TCASQL_HOME = $(TOPDIR)/common/tcasqlpp
+    INCLUDES   += -I$(TCASQL_HOME)/include
+else
+    TCASQL_HOME = /usr
+    INCLUDES   += -I$(TCASQL_HOME)/include/tcasqlpp
+endif
+ LFLAGS += -L$(TCASQL_HOME)/lib
+ LIBS   += -ltcasqlpp
+endif
+
+
+ifdef NEED_TCASNMP
+ifdef TCAMAKE_PROJECT
+    TCASNMP_HOME = $(TOPDIR)/common/tcasnmp
+    INCLUDES    += -I$(TCASNMP_HOME)/include
+else
+    TCASNMP_HOME = /usr
+    INCLUDES    += -I$(TCASNMP_HOME)/include/tcasnmp
+endif
+  LFLAGS += -L$(TCASNMP_HOME)/lib
+  LIBS   += -ltcasnmp
+endif
+
+
+ifdef NEED_HEXES
+  HEXESHOME = $(TOPDIR)/common/hexes
+  INCLUDES += -I$(HEXESHOME)/include
+  LFLAGS   += -L$(HEXESHOME)/lib
+  LIBS     += -lhexes
+endif
+
+
+ifdef NEED_TCAJSON
+ifdef TCAMAKE_PROJECT
+    TCAJSON_HOME = $(TOPDIR)/common/tcajson
+    INCLUDES   += -I$(TCAJSON_HOME)/include
+else
+    TCAJSON_HOME = /usr
+    INCLUDES   += -I$(TCAJSON_HOME)/include/tcajson
+endif
+  LFLAGS  += -L$(TCAJSON_HOME)/lib
+  LIBS    += -ltcajson
+endif
+
+#-------------------------------------------------------------------------
+# Tnms libs
+#-------------------------------------------------------------------------
+
+ifdef NEED_TNMSAPI
+  TNMSAPI    = $(TOPDIR)/TnmsApi
+  INCLUDES  += -I$(TNMSAPI) -I$(TOPDIR)/common/tnmsCore/include -I$(TOPDIR)/common/tcanetpp/include -I$(TOPDIR)/common/tcaxmlpp/include
+  LFLAGS    += -L$(TNMSAPI)/lib
+  LIBS      += -lTnmsApi 
+endif
+
+
+ifdef NEED_TNMSCORE
+  TNMSCORE  = $(TOPDIR)/common/tnmsCore
+  INCLUDES += -I$(TNMSCORE)/include -I$(TOPDIR)/common/tcanetpp/include \
+              -I$(TOPDIR)/common/tcaxmlpp/include
+  LFLAGS   += -L$(TNMSCORE)/lib
+  LIBS     += -ltnmsCore
+endif
+
+
+ifdef NEED_TNMSSESSION
+  TNMSSESSION = $(TOPDIR)/common/tnmsSession
+  INCLUDES   += -I$(TNMSSESSION)/include
+  LFLAGS     += -L$(TNMSSESSION)/lib
+  LIBS       += -ltnmsSession
+endif
+
+#-------------------------------------------------------------------------
+# externals
+#-------------------------------------------------------------------------
+
+ifdef NEED_GSOAP
+  GSOAP_DIR = $(TOPDIR)/common/ext/gsoap-2.8/gsoap
+  #GSOAP_BIN = $(GSOAP_DIR)/bin/macosx
+  GSOAP_BIN = $(GSOAP_DIR)/bin/linux386
+  INCLUDES += -I${GSOAP_DIR}
+endif
+
+
+ifdef NEED_LIBPQXX
+  LIBS     += -lpqxx -lpq
+  CFLAGS   += -DUSE_POSTGRESQL
+endif
+
+
+ifdef NEED_MYSQL
+  MYSQL_HOME = /usr
+  INCLUDES  += -I$(MYSQL_HOME)/include/mysql
+  LFLAGS    += -L$(MYSQL_HOME)/lib
+  CFLAGS    += -DUSE_MYSQL
+  LIBS      += -lmysqlclient
+endif
+
+
+ifdef NEED_NET_SNMP
+  NETSNMP_HOME = /usr
+  INCLUDES += -I$(NETSNMP_HOME)/include/net-snmp
+  LIBS     += -lnetsnmp -lcrypto
+endif
+
+
+ifdef NEED_PYTHON
+  INCLUDES += -I/usr/include/python2.6
+  MACROS   += -DHAVE_CONFIG_H
+endif
+
+
+ifdef NEED_PTHREADS
+  LIB_PTHREAD ?= -lpthread
+  LFLAGS      += -L/usr/lib
+  LIBS        +=   $(LIB_PTHREAD)
+  CFLAGS      += $(PTHREAD_CFLAGS)
+  MACROS      += -D_THREAD_SAFE -D_REENTRANT -D_PTHREADS -D_GNU_SOURCE -DPTHREADS
+endif
+
+
+ifdef NEED_NCURSES
+  LIBS   += -lpanel -lncurses
+endif
+
+
+ifdef NEED_LIBPANEL
+  LIBS   += -lpanel -lncurses
+endif
+
+
+ifdef NEED_LIBDL
+  LIB_DL ?= -ldl
+  LIBS   += $(LIB_DL)
+endif
+
+
+ifdef NEED_LIBRT
+  LIB_RT ?= -lrt
+  LIBS   += $(LIB_RT)
+  CFLAGS += -DUSE_LIBRT
+endif
+
+
+ifdef NEED_SOCKET
+  LIBS   += $(LIB_SOCKET) $(LIB_NSL)
+endif
+
+
+ifdef NEED_BOOST_REGEXP
+  BOOST_HOME  = /usr
+  LFLAGS     += -L$(BOOST_HOME)/lib/boost-1_35
+  INCLUDES   += -I$(BOST_HOME)/include/boost-1_35
+ifdef NEED_PTHREADS
+    LIBS   += -lboost_regex-mt
+else
+    LIBS   += -lboost_regex
+endif
+endif
+
+
+ifdef NEED_LIBXML2
+  INCLUDES   += -I/usr/include/libxml2
+  LIBS       += -lxml2
+endif
+
+
+ifdef NEED_ZLIB
+  ZLIB_HOME = $(TOPDIR)/common/ext/zlib
+  INCLUDES += -I$(ZLIB_HOME) -I$(TOPDIR)/common/ext/zipstream
+  LFLAGS   += -L$(ZLIB_HOME)
+  LIBS     += -lz
+endif
+
+
+ifdef NEED_ZIPSTREAM
+  INCLUDES += -I$(TOPDIR)/common/ext/zipstream
+endif
+
+#-------------------------------------------------------------------------
+## Do not edit below this line
+ifndef TCAMAKE_AUTODEPEND
+  include $(TOPDIR)/tcamake/autodepend
+endif
+
