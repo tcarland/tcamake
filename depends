@@ -12,7 +12,7 @@ ifndef TCAMAKE_DEPENDS
 endif
 
 #-------------------------------------------------------------------------
-#   Defined requirements below
+#   Define requirements below
 #-------------------------------------------------------------------------
 
 ifdef NEED_LIBPCAP
@@ -39,7 +39,7 @@ ifdef TCAMAKE_PROJECT
     TCAXML_HOME = $(TOPDIR)/common/tcaxmlpp
     INCLUDES   += -I$(TCAXML_HOME)/include
 else
-    TCAXML_HOME = /usr
+    TCAXML_HOME = /usr/local
     INCLUDES   += -I$(TCAXML_HOME)/include/tcaxmlpp
 endif
   LFLAGS += -L$(TCAXML_HOME)/lib
@@ -61,7 +61,7 @@ ifdef TCAMAKE_PROJECT
     TCANETPP_HOME = $(TOPDIR)/common/tcanetpp
     INCLUDES     += -I$(TCANETPP_HOME)/include
 else
-    TCANETPP_HOME = /usr
+    TCANETPP_HOME = /usr/local
     INCLUDES     += -I$(TCANETPP_HOME)/include/tcanetpp
 endif
   LFLAGS += -L$(TCANETPP_HOME)/lib
@@ -74,7 +74,7 @@ ifdef TCAMAKE_PROJECT
     TCANETPP_HOME = $(TOPDIR)/common/tcanetpp
     INCLUDES     += -I$(TCANETPP_HOME)/include
 else
-    TCANETPP_HOME = /usr
+    TCANETPP_HOME = /usr/local
     INCLUDES     += -I$(TCANETPP_HOME)/include/tcanetpp
 endif
   LFLAGS += -L$(TCANETPP_HOME)/lib
@@ -87,7 +87,7 @@ ifdef TCAMAKE_PROJECT
     TCASQL_HOME = $(TOPDIR)/common/tcasqlpp
     INCLUDES   += -I$(TCASQL_HOME)/include
 else
-    TCASQL_HOME = /usr
+    TCASQL_HOME = /usr/local
     INCLUDES   += -I$(TCASQL_HOME)/include/tcasqlpp
 endif
  LFLAGS += -L$(TCASQL_HOME)/lib
@@ -100,7 +100,7 @@ ifdef TCAMAKE_PROJECT
     TCASNMP_HOME = $(TOPDIR)/common/tcasnmp
     INCLUDES    += -I$(TCASNMP_HOME)/include
 else
-    TCASNMP_HOME = /usr
+    TCASNMP_HOME = /usr/local
     INCLUDES    += -I$(TCASNMP_HOME)/include/tcasnmp
 endif
   LFLAGS += -L$(TCASNMP_HOME)/lib
@@ -121,7 +121,7 @@ ifdef TCAMAKE_PROJECT
     TCAJSON_HOME = $(TOPDIR)/common/tcajson
     INCLUDES   += -I$(TCAJSON_HOME)/include
 else
-    TCAJSON_HOME = /usr
+    TCAJSON_HOME = /usr/local
     INCLUDES   += -I$(TCAJSON_HOME)/include/tcajson
 endif
   LFLAGS  += -L$(TCAJSON_HOME)/lib
@@ -173,14 +173,13 @@ ifdef NEED_LIBPQXX
   CFLAGS   += -DUSE_POSTGRESQL
 endif
 
-
 ifdef NEED_RDKAFKA
   RDKAFKA_HOME = $(TOPDIR)/common/ext/librdkafka
-  INCLUDES += -I$(RDKAFKA_HOME)/src-cpp
-  LFLAGS   += -L$(RDKAFKA_HOME)/src-cpp -L$(RDKAFKA_HOME)/src
-  LIBS     += -lrdkafka++ -lrkafka -lsasl2
+  INCLUDES    += -I$(RDKAFKA_HOME)/src-cpp
+  LFLAGS      += -L$(RDKAFKA_HOME)/src-cpp -L$(RDKAFKA_HOME)/src
+  LIBS        += -lrdkafka++ -lrdkafka -lsasl2
+  MACROS      += -DRDKAFKA
 endif
-
 
 ifdef NEED_MYSQL
   MYSQL_HOME = /usr
@@ -190,44 +189,32 @@ ifdef NEED_MYSQL
   LIBS      += -lmysqlclient
 endif
 
-
 ifdef NEED_NET_SNMP
   NETSNMP_HOME = /usr
   INCLUDES += -I$(NETSNMP_HOME)/include/net-snmp
   LIBS     += -lnetsnmp -lcrypto
 endif
 
-
-ifdef NEED_PYTHON
-  INCLUDES += -I/usr/include/python2.6
-  MACROS   += -DHAVE_CONFIG_H
-endif
-
-
 ifdef NEED_PTHREADS
   LIB_PTHREAD ?= -lpthread
   LFLAGS      += -L/usr/lib
-  LIBS        +=   $(LIB_PTHREAD)
+  LIBS        += $(LIB_PTHREAD)
   CFLAGS      += $(PTHREAD_CFLAGS)
   MACROS      += -D_THREAD_SAFE -D_REENTRANT -D_PTHREADS -D_GNU_SOURCE -DPTHREADS
 endif
-
 
 ifdef NEED_NCURSES
   LIBS   += -lpanel -lncurses
 endif
 
-
 ifdef NEED_LIBPANEL
   LIBS   += -lpanel -lncurses
 endif
-
 
 ifdef NEED_LIBDL
   LIB_DL ?= -ldl
   LIBS   += $(LIB_DL)
 endif
-
 
 ifdef NEED_LIBRT
   LIB_RT ?= -lrt
@@ -235,11 +222,9 @@ ifdef NEED_LIBRT
   CFLAGS += -DUSE_LIBRT
 endif
 
-
 ifdef NEED_SOCKET
   LIBS   += $(LIB_SOCKET) $(LIB_NSL)
 endif
-
 
 ifdef NEED_BOOST_REGEXP
   BOOST_HOME  = /usr
@@ -252,12 +237,10 @@ else
 endif
 endif
 
-
 ifdef NEED_LIBXML2
   INCLUDES   += -I/usr/include/libxml2
   LIBS       += -lxml2
 endif
-
 
 ifdef NEED_ZLIB
   ZLIB_HOME = $(TOPDIR)/common/ext/zlib
@@ -265,7 +248,6 @@ ifdef NEED_ZLIB
   LFLAGS   += -L$(ZLIB_HOME)
   LIBS     += -lz
 endif
-
 
 ifdef NEED_ZIPSTREAM
   INCLUDES += -I$(TOPDIR)/common/ext/zipstream
