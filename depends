@@ -15,25 +15,13 @@ endif
 #   Define requirements below
 #-------------------------------------------------------------------------
 
-ifdef NEED_LIBPCAP
-  LIBS  += -lpcap
+ifdef NEED_RDKAFKA
+  RDKAFKA_HOME = $(TOPDIR)/common/ext/librdkafka
+  INCLUDES    += -I$(RDKAFKA_HOME)/src-cpp
+  LFLAGS      += -L$(RDKAFKA_HOME)/src-cpp -L$(RDKAFKA_HOME)/src
+  LIBS        += -lrdkafka++ -lrdkafka -lsasl2
+  MACROS      += -DRDKAFKA
 endif
-
-ifdef NEED_ZLIB_INCLUDE
-  INCLUDES += -I$/usrinclude/zlib
-endif
-
-ifdef NEED_LIBXML2_INCLUDE
-  INCLUDES += -I/usr/include/libxml2
-endif
-
-ifdef NEED_OPENSSL
-  CFLAGS   += -DWITH_OPENSSL
-  LIBS     += -lssl -lcrypto
-  #LIBS     += -Wl,-Bstatic -lssl -lcrypto -Wl,-Bdynamic
-endif
-
-
 ifdef NEED_TCAXMLPP
 ifdef TCAMAKE_PROJECT
     TCAXML_HOME = $(TOPDIR)/common/tcaxmlpp
@@ -173,14 +161,6 @@ ifdef NEED_LIBPQXX
   CFLAGS   += -DUSE_POSTGRESQL
 endif
 
-ifdef NEED_RDKAFKA
-  RDKAFKA_HOME = $(TOPDIR)/common/ext/librdkafka
-  INCLUDES    += -I$(RDKAFKA_HOME)/src-cpp
-  LFLAGS      += -L$(RDKAFKA_HOME)/src-cpp -L$(RDKAFKA_HOME)/src
-  LIBS        += -lrdkafka++ -lrdkafka -lsasl2
-  MACROS      += -DRDKAFKA
-endif
-
 ifdef NEED_MYSQL
   MYSQL_HOME = /usr
   INCLUDES  += -I$(MYSQL_HOME)/include/mysql
@@ -237,9 +217,27 @@ else
 endif
 endif
 
+ifdef NEED_LIBXML2_INCLUDE
+  INCLUDES += -I/usr/include/libxml2
+endif
+
 ifdef NEED_LIBXML2
   INCLUDES   += -I/usr/include/libxml2
   LIBS       += -lxml2
+endif
+
+ifdef NEED_LIBPCAP
+  LIBS  += -lpcap
+endif
+
+ifdef NEED_OPENSSL
+  CFLAGS   += -DWITH_OPENSSL
+  LIBS     += -lssl -lcrypto
+  #LIBS     += -Wl,-Bstatic -lssl -lcrypto -Wl,-Bdynamic
+endif
+
+ifdef NEED_ZLIB_INCLUDE
+  INCLUDES += -I$/usrinclude/zlib
 endif
 
 ifdef NEED_ZLIB
