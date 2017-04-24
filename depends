@@ -15,16 +15,9 @@ endif
 #   Define requirements below
 #-------------------------------------------------------------------------
 
-ifdef NEED_RDKAFKA
-  RDKAFKA_HOME = $(TOPDIR)/common/ext/librdkafka
-  INCLUDES    += -I$(RDKAFKA_HOME)/src-cpp
-  LFLAGS      += -L$(RDKAFKA_HOME)/src-cpp -L$(RDKAFKA_HOME)/src
-  LIBS        += -lrdkafka++ -lrdkafka -lsasl2
-  MACROS      += -DRDKAFKA
-endif
 ifdef NEED_TCAXMLPP
 ifdef TCAMAKE_PROJECT
-    TCAXML_HOME = $(TOPDIR)/common/tcaxmlpp
+    TCAXML_HOME = $(TOPDIR)/tcaxmlpp
     INCLUDES   += -I$(TCAXML_HOME)/include
 else
     TCAXML_HOME = /usr/local
@@ -37,7 +30,7 @@ endif
 
 ifdef NEED_TCANETPP_INCLUDE
 ifdef TCAMAKE_PROJECT
-    INCLUDES += -I$(TOPDIR)/common/tcanetpp/include
+    INCLUDES += -I$(TOPDIR)/tcanetpp/include
 else
     INCLUDES += -I/usr/include/tcanetpp
 endif
@@ -46,7 +39,7 @@ endif
 
 ifdef NEED_TCANETPP
 ifdef TCAMAKE_PROJECT
-    TCANETPP_HOME = $(TOPDIR)/common/tcanetpp
+    TCANETPP_HOME = $(TOPDIR)/tcanetpp
     INCLUDES     += -I$(TCANETPP_HOME)/include
 else
     TCANETPP_HOME = /usr/local
@@ -59,7 +52,7 @@ endif
 
 ifdef NEED_TCACMDBUF
 ifdef TCAMAKE_PROJECT
-    TCANETPP_HOME = $(TOPDIR)/common/tcanetpp
+    TCANETPP_HOME = $(TOPDIR)/tcanetpp
     INCLUDES     += -I$(TCANETPP_HOME)/include
 else
     TCANETPP_HOME = /usr/local
@@ -72,7 +65,7 @@ endif
 
 ifdef NEED_TCASQLPP
 ifdef TCAMAKE_PROJECT
-    TCASQL_HOME = $(TOPDIR)/common/tcasqlpp
+    TCASQL_HOME = $(TOPDIR)/tcasqlpp
     INCLUDES   += -I$(TCASQL_HOME)/include
 else
     TCASQL_HOME = /usr/local
@@ -85,7 +78,7 @@ endif
 
 ifdef NEED_TCASNMP
 ifdef TCAMAKE_PROJECT
-    TCASNMP_HOME = $(TOPDIR)/common/tcasnmp
+    TCASNMP_HOME = $(TOPDIR)/tcasnmp
     INCLUDES    += -I$(TCASNMP_HOME)/include
 else
     TCASNMP_HOME = /usr/local
@@ -97,7 +90,7 @@ endif
 
 
 ifdef NEED_HEXES
-  HEXESHOME = $(TOPDIR)/common/hexes
+  HEXESHOME = $(TOPDIR)/hexes
   INCLUDES += -I$(HEXESHOME)/include
   LFLAGS   += -L$(HEXESHOME)/lib
   LIBS     += -lhexes
@@ -106,7 +99,7 @@ endif
 
 ifdef NEED_TCAJSON
 ifdef TCAMAKE_PROJECT
-    TCAJSON_HOME = $(TOPDIR)/common/tcajson
+    TCAJSON_HOME = $(TOPDIR)/tcajson
     INCLUDES   += -I$(TCAJSON_HOME)/include
 else
     TCAJSON_HOME = /usr/local
@@ -120,25 +113,34 @@ endif
 # Tnms libs
 #-------------------------------------------------------------------------
 
+ifdef NEED_RDKAFKA
+  RDKAFKA_HOME = $(TOPDIR)/common/ext/librdkafka
+  INCLUDES    += -I$(RDKAFKA_HOME)/src-cpp
+  LFLAGS      += -L$(RDKAFKA_HOME)/src-cpp -L$(RDKAFKA_HOME)/src
+  LIBS        += -lrdkafka++ -lrdkafka -lsasl2
+  MACROS      += -DRDKAFKA
+endif
+
+
 ifdef NEED_TNMSAPI
   TNMSAPI    = $(TOPDIR)/TnmsApi
-  INCLUDES  += -I$(TNMSAPI) -I$(TOPDIR)/common/tnmsCore/include -I$(TOPDIR)/common/tcanetpp/include -I$(TOPDIR)/common/tcaxmlpp/include
+  INCLUDES  += -I$(TNMSAPI) -I$(TOPDIR)/tnmsCore/include -I$(TOPDIR)/tcanetpp/include -I$(TOPDIR)/tcaxmlpp/include
   LFLAGS    += -L$(TNMSAPI)/lib
   LIBS      += -lTnmsApi 
 endif
 
 
 ifdef NEED_TNMSCORE
-  TNMSCORE  = $(TOPDIR)/common/tnmsCore
-  INCLUDES += -I$(TNMSCORE)/include -I$(TOPDIR)/common/tcanetpp/include \
-              -I$(TOPDIR)/common/tcaxmlpp/include
+  TNMSCORE  = $(TOPDIR)/tnmsCore
+  INCLUDES += -I$(TNMSCORE)/include -I$(TOPDIR)/tcanetpp/include \
+              -I$(TOPDIR)/tcaxmlpp/include
   LFLAGS   += -L$(TNMSCORE)/lib
   LIBS     += -ltnmsCore
 endif
 
 
 ifdef NEED_TNMSSESSION
-  TNMSSESSION = $(TOPDIR)/common/tnmsSession
+  TNMSSESSION = $(TOPDIR)/tnmsSession
   INCLUDES   += -I$(TNMSSESSION)/include
   LFLAGS     += -L$(TNMSSESSION)/lib
   LIBS       += -ltnmsSession
