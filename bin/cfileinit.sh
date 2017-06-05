@@ -1,11 +1,11 @@
 #!/bin/bash
 #
-#       init_cppfile.sh
+#       cfileinit.sh
 #
-#   Creates a template source file with ifndef/define declarations
-#   and namespace declarations, if applicable.
+#   A template for creating a source file with ifndef/define and 
+#   namespace declarations, if applicable.
 #
-VERSION="1.31"
+VERSION="1.32"
 AUTHOR="tcarland@gmail.com"
 PNAME=${0##*\/}
 
@@ -48,6 +48,7 @@ setSourceName()
     return 0 
 }
 
+
 setDefineName()
 {
     local namespace=$1
@@ -69,7 +70,7 @@ setDefineName()
     return 0
 }
 
-
+# The template definition for header files
 createHeader()
 {
     local filename=$1
@@ -120,6 +121,7 @@ createHeader()
     echo "#endif  // $define" >> $filename
 }
 
+# The template definition for source files
 createSource()
 {
     local filename=$1

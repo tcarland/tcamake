@@ -1,6 +1,6 @@
 # tcamake/environment
 #
-#   determines and sets up a platform specific environment
+#   sets up a platform specific environment
 #
 #   Timothy C. Arland <tcarland@gmail.com>
 #

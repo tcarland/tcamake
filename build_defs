@@ -6,15 +6,17 @@ export TCAMAKE_PROJECT="true"
 # Additional variables used by the build system or for projects
 # can be set here. Some examples:
 #
-#TCAMAKE_PROJECT_DEBUG = 1
+# generally we wouldn't set this globally here but source from within our project
+# at build time
+#export TCAMAKE_DEBUG = 1
 
-# to be used as the install prefix
-#TCAMAKE_INSTALL_PREFIX="${HOME}/tnms"
+# The install prefix that can be used within the 'make install' target. 
+#TCAMAKE_PREFIX="${HOME}/tnms"
 
-# This defines the supported database types which can be 
-# easily extended.
-#PROJECT_USEDB="mysql"
-#USE_PTHREADES=1
+# Includes can be controlled across projects by defining a few USE_xx flags.
+# eg.
+#USE_MYSQL=1  
+#USE_PTHREADS=1
 #USE_LIBRT=1
 
 

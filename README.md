@@ -2,7 +2,7 @@ tcamake
 =======
 
 ***Author***  tcarland@gmail.com  
-***Version*** 20151130
+***Version*** 20170208
 
 
 ### Overview:
@@ -23,8 +23,8 @@ as a build system mechanism or even in addition to the gnu autotools. It is
 surprisingly capable and even useful for managing a build environment 
 for very large projects.   
 
-  **tcamake** is nothing more than an include heirarchy that defines all of 
-the dependencies of projects within the build system. It does not determine 
+  **tcamake** is simply an include heirarchy that defines all of the
+dependencies of projects within the build system. It does not determine 
 compiler capabilities and library function checks to the extent of the
 Gnu autotools.  If needed, gnu's autoconf could still be used per 
 project if desired.   

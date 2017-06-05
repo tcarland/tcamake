@@ -29,7 +29,7 @@
 #
 #   makebindep-cmd: Use after a link rule.  Expects $(LFLAGS) and $(LIBS)
 #                   to include all the libraries that go into the build.
-#                   The library dependencies will be written out to a
+#                   The library dependencies will be written out to 
 #                   <target>.bd.
 #   makedep-prefix:
 #   makedep-precmd: These two are used in combination when building a .o
@@ -42,5 +42,4 @@
 
 include $(TOPDIR)/tcamake/environment
 include $(TOPDIR)/tcamake/tcamake_depends
-
 

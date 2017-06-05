@@ -1,14 +1,11 @@
 #!/bin/bash
 #
-#   Build script for projects that may wish to be extracted or 
-#   distributed individually from the overall workspace. 
-#   Primarily created for making project distributions via the 
-#   'build.sh dist' command.
+#   A script for projects that wish to be extracted or 
+#   distributed individually outside of the workspace. 
 #
-
-PNAME=${0##*\/}
 VERSION="1.17"
 AUTHOR="tcarland@gmail.com"
+PNAME=${0##*\/}
 
 PARENT=".."
 
@@ -246,7 +243,6 @@ fi
 
 
 clearLinks
-
 makeLinks
 
 if [ $DODIST -eq 0 ]; then

@@ -1,11 +1,11 @@
 #!/bin/bash
 #
+#  A simple help script for creating a new workspace project from
+#  the Makefile templates in tcamake/template.
 #
 VERSION="0.91"
 AUTHOR="tcarland@gmail.com"
-
 PNAME=${0##*\/}
-
 
 PARENT=".."
 TOPDIR="."
@@ -19,7 +19,6 @@ PROJECT=
 DRYRUN=0
 RETVAL=0
 reply=
-
 
 
 usage()
