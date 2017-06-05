@@ -118,25 +118,34 @@ endif
 # Tnms libs
 #-------------------------------------------------------------------------
 
+ifdef NEED_RDKAFKA
+  RDKAFKA_HOME = $(TOPDIR)/common/ext/librdkafka
+  INCLUDES    += -I$(RDKAFKA_HOME)/src-cpp
+  LFLAGS      += -L$(RDKAFKA_HOME)/src-cpp -L$(RDKAFKA_HOME)/src
+  LIBS        += -lrdkafka++ -lrdkafka -lsasl2
+  MACROS      += -DRDKAFKA
+endif
+
+
 ifdef NEED_TNMSAPI
   TNMSAPI    = $(TOPDIR)/TnmsApi
-  INCLUDES  += -I$(TNMSAPI) -I$(TOPDIR)/common/tnmsCore/include -I$(TOPDIR)/common/tcanetpp/include -I$(TOPDIR)/common/tcaxmlpp/include
+  INCLUDES  += -I$(TNMSAPI) -I$(TOPDIR)/tnmsCore/include -I$(TOPDIR)/tcanetpp/include -I$(TOPDIR)/tcaxmlpp/include
   LFLAGS    += -L$(TNMSAPI)/lib
   LIBS      += -lTnmsApi 
 endif
 
 
 ifdef NEED_TNMSCORE
-  TNMSCORE  = $(TOPDIR)/common/tnmsCore
-  INCLUDES += -I$(TNMSCORE)/include -I$(TOPDIR)/common/tcanetpp/include \
-              -I$(TOPDIR)/common/tcaxmlpp/include
+  TNMSCORE  = $(TOPDIR)/tnmsCore
+  INCLUDES += -I$(TNMSCORE)/include -I$(TOPDIR)/tcanetpp/include \
+              -I$(TOPDIR)/tcaxmlpp/include
   LFLAGS   += -L$(TNMSCORE)/lib
   LIBS     += -ltnmsCore
 endif
 
 
 ifdef NEED_TNMSSESSION
-  TNMSSESSION = $(TOPDIR)/common/tnmsSession
+  TNMSSESSION = $(TOPDIR)/tnmsSession
   INCLUDES   += -I$(TNMSSESSION)/include
   LFLAGS     += -L$(TNMSSESSION)/lib
   LIBS       += -ltnmsSession
