@@ -1,6 +1,7 @@
 # depends
 #
 #  This file is typically site customized for internal projects and dependencies.
+#
 
 ifndef TCAMAKE_PROJECT_DEPENDS
   TCAMAKE_PROJECT_DEPENDS=1
@@ -104,11 +105,11 @@ endif
 
 ifdef NEED_TCAJSON
 ifdef TCAMAKE_PROJECT
-    TCAJSON_HOME = $(TOPDIR)/tcajson
-    INCLUDES   += -I$(TCAJSON_HOME)/include
+  TCAJSON_HOME = $(TOPDIR)/tcajson
+  INCLUDES   += -I$(TCAJSON_HOME)/include
 else
-    TCAJSON_HOME = /usr/local
-    INCLUDES   += -I$(TCAJSON_HOME)/include/tcajson
+  TCAJSON_HOME = /usr/local
+  INCLUDES   += -I$(TCAJSON_HOME)/include/tcajson
 endif
   LFLAGS  += -L$(TCAJSON_HOME)/lib
   LIBS    += -ltcajson
@@ -119,9 +120,15 @@ endif
 #-------------------------------------------------------------------------
 
 ifdef NEED_RDKAFKA
+ifdef TCAMAKE_PROJECT
   RDKAFKA_HOME = $(TOPDIR)/common/ext/librdkafka
   INCLUDES    += -I$(RDKAFKA_HOME)/src-cpp
   LFLAGS      += -L$(RDKAFKA_HOME)/src-cpp -L$(RDKAFKA_HOME)/src
+else
+  RDKAFKA_HOME = /usr
+  INCLUDES    += -I$(RDKAFKA_HOME)/include
+  LFLAGS      += -L$(RDKAFKA_HOME)/lib
+endif
   LIBS        += -lrdkafka++ -lrdkafka -lsasl2
   MACROS      += -DRDKAFKA
 endif
@@ -166,6 +173,7 @@ else
 endif
   LIBS        += -lrdkafka++ -lrdkafka -lsasl2
   MACROS      += -DRDKAFKA
+endif
 endif
 
 ifdef NEED_GSOAP
