@@ -92,7 +92,7 @@ endif
 
 ifdef NEED_HEXES
 ifdef TCAMAKE_PROJECT
-  HEXESHOME = $(TOPDIR)/hexes
+  HEXESHOME = $(TOPDIR)/libhexes
   INCLUDES += -I$(HEXESHOME)/include
 else
   HEXESHOME = /usr/local
