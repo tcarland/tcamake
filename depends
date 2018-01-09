@@ -150,7 +150,7 @@ endif
 
 ifdef NEED_RDKAFKA
 ifdef TCAMAKE_PROJECT
-  RDKAFKA_HOME = $(TOPDIR)/common/ext/librdkafka
+  RDKAFKA_HOME = $(TOPDIR)/common/librdkafka
   INCLUDES    += -I$(RDKAFKA_HOME)/src-cpp
   LFLAGS      += -L$(RDKAFKA_HOME)/src-cpp -L$(RDKAFKA_HOME)/src
 else
@@ -164,7 +164,7 @@ endif
 
 ifdef NEED_GSOAP
 ifdef TCAMAKE_PROJECT
-  GSOAP_DIR = $(TOPDIR)/common/ext/gsoap-2.8/gsoap
+  GSOAP_DIR = $(TOPDIR)/common/gsoap-2.8/gsoap
   #GSOAP_BIN = $(GSOAP_DIR)/bin/macosx
   GSOAP_BIN = $(GSOAP_DIR)/bin/linux386
   INCLUDES += -I${GSOAP_DIR}
@@ -257,14 +257,14 @@ ifdef NEED_ZLIB_INCLUDE
 endif
 
 ifdef NEED_ZLIB
-  ZLIB_HOME = $(TOPDIR)/common/ext/zlib
-  INCLUDES += -I$(ZLIB_HOME) -I$(TOPDIR)/common/ext/zipstream
+  ZLIB_HOME = $(TOPDIR)/common/zlib
+  INCLUDES += -I$(ZLIB_HOME) -I$(TOPDIR)/common/zipstream
   LFLAGS   += -L$(ZLIB_HOME)
   LIBS     += -lz
 endif
 
 ifdef NEED_ZIPSTREAM
-  INCLUDES += -I$(TOPDIR)/common/ext/zipstream
+  INCLUDES += -I$(TOPDIR)/common/zipstream
 endif
 
 #-------------------------------------------------------------------------
