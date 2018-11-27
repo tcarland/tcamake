@@ -3,7 +3,7 @@
 #   A script for projects that wish to be extracted or 
 #   distributed individually outside of the workspace. 
 #
-VERSION="1.17"
+VERSION="1.18"
 AUTHOR="tcarland@gmail.com"
 PNAME=${0##*\/}
 
@@ -11,10 +11,10 @@ PARENT=".."
 
 LINKLIST="tcamake"
 TMDEPFILE="tcamake_depends"
-DODIST=0
 RSYNC="rsync"
 OPTIONS="-avL --delete --exclude=.cvs --exclude=.svn --exclude=.hg --exclude=.git "
 DRYRUN="--dry-run"
+DODIST=0
 
 dry=
 retval=0
@@ -63,15 +63,13 @@ usage()
 findTopDirectory()
 {
     local srcdir="$PWD"
-    local curdir=""
     local result=""
     
     retval=0
 
     while [ $retval -eq 0 ]
     do
-        curdir="${PWD}"
-        result=`find . -name "$TMDEPFILE"`
+        result=$(find . -name "$TMDEPFILE")
         if [ -n "$result" ]; then
             retval=1
         fi
@@ -104,7 +102,7 @@ clearLinks()
 {
     for lf in $LINKLIST; do
         if [ -L $lf ]; then
-            unlink $lf
+            ( unlink $lf )
         fi
     done
 
@@ -118,7 +116,7 @@ makeLinks()
     
     for lf in $LINKLIST; do
         echo "  ln -s $TOPDIR/$lf ."
-        ln -s "$TOPDIR/$lf"
+        ( ln -s "$TOPDIR/$lf" )
     done
 
     return 1
@@ -131,9 +129,9 @@ doBuild()
 
     echo ""
     if [ -n "$target" ]; then
-        make $target
+        ( make $target )
     else
-        make all
+        ( make all )
     fi
     echo ""
     retval=$?
@@ -145,7 +143,6 @@ doBuild()
 doDist()
 {
     local target="$1"
-    local curdir=$PWD
     local options="$OPTIONS"
     local dstpath=
 

@@ -252,6 +252,11 @@ ifdef NEED_OPENSSL
   #LIBS     += -Wl,-Bstatic -lssl -lcrypto -Wl,-Bdynamic
 endif
 
+ifdef NEED_OPENSSL_STATIC
+  CFLAGS   += -DWITH_OPENSSL
+  LIBS     += -Wl,-Bstatic -lssl -lcrypto -Wl,-Bdynamic
+endif
+
 ifdef NEED_ZLIB_INCLUDE
   INCLUDES += -I$/usrinclude/zlib
 endif
