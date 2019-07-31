@@ -3,9 +3,8 @@
 #  A simple help script for creating a new workspace project from
 #  the Makefile templates in tcamake/template.
 #
-VERSION="0.91"
-AUTHOR="tcarland@gmail.com"
 PNAME=${0##*\/}
+AUTHOR="tcarland@gmail.com"
 
 PARENT=".."
 TOPDIR="."
@@ -124,7 +123,8 @@ createProject()
     fi
 
     echo "$RSYNC $options $srcpath $dstpath"
-    $RSYNC $options $srcpath $dstpath
+    
+    ( $RSYNC $options $srcpath $dstpath )
     echo ""
 
     cd $dstpath
@@ -210,7 +210,7 @@ else
         echo "Error! A file of that name already exists. Aborting..."
         exit 1
     else
-        mkdir -p $PROJECT
+        ( mkdir -p $PROJECT )
         RETVAL=$?
         if [ $RETVAL -eq 1 ]; then
             echo "Error creating target directory '$PROJECT'"

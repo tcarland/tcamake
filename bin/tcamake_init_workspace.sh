@@ -3,12 +3,10 @@
 #  Initializes a new workspace, source repository, or project root
 #  using the 'tcamake' project as template
 #
-VERSION="0.1"
+PNAME=${0##*\/}
 AUTHOR="tcarland@gmail.com"
 
-PNAME=${0##*\/}
-
-BASE=
+BASENAME=
 TARGET=
 RSYNC="rsync "
 OPTIONS="-av"
@@ -39,9 +37,9 @@ version()
 
 setBasename()
 {
-    local curdir=`pwd`
+    local curdir=$(pwd)
     
-    BASE=`basename $curdir`
+    BASENAME=$(basename $curdir)
 
     return 0
 }
@@ -62,7 +60,7 @@ createWorkspace()
     echo "--------------------------------"
     echo "mkdir -p $target"
     if [ -z "$dryrun" ]; then
-        mkdir -p $target
+        ( mkdir -p $target )
     fi
     echo ""
 
@@ -81,19 +79,21 @@ createWorkspace()
    
     echo "--------------------------------"
     echo "$RSYNC $options --exclude=\"*project*\" ./template/ $path"
-    $RSYNC $options --exclude="*project*" ./template/ $path
+
+    ( $RSYNC $options --exclude="*project*" ./template/ $path )
     echo ""
 
     echo "--------------------------------"
     echo "mkdir -p $target/tcamake"
     if [ -z "$dryrun" ]; then
-        mkdir -p "$target/tcamake"
+        ( mkdir -p "$target/tcamake" )
     fi
     echo ""
 
     echo "--------------------------------"
     echo "$RSYNC $options ./ ${target}/tcamake/"
-    $RSYNC $options ./ "${target}/tcamake/"
+
+    ( $RSYNC $options ./ "${target}/tcamake/" )
     echo ""
 
     return 0
@@ -107,12 +107,12 @@ fi
 
 setBasename
 
-if [ "$BASE" == "bin" ]; then
+if [ "$BASENAME" == "bin" ]; then
     pushd .. > /dev/null
     setBasename
 fi
 
-if [ "$BASE" != "tcamake" ]; then
+if [ "$BASENAME" != "tcamake" ]; then
     echo "Invalid location, tcamake not found"
     echo "Must run this script from within 'tcamake'"
     exit 1

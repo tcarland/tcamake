@@ -16,6 +16,9 @@ endif
 #   Define requirements below
 #-------------------------------------------------------------------------
 
+# Common Libraries
+#
+
 ifdef NEED_TCAXMLPP
 ifdef TCAMAKE_PROJECT
     TCAXML_HOME = $(TOPDIR)/tcaxmlpp
@@ -116,7 +119,7 @@ endif
 endif
 
 #-------------------------------------------------------------------------
-# Tnms libs
+# tnms libs
 #-------------------------------------------------------------------------
 
 ifdef NEED_TNMSAPI

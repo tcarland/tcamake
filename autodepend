@@ -1,6 +1,6 @@
 # tcamake/autodepend
 #
-#   This file is included internally and should not need to edited.
+#   This file is included internally and should not need editing.
 #
 #   Timothy C. Arland <tcarland@gmail.com>
 #
@@ -30,6 +30,7 @@ endif
 	$(CC) -o $@ -c $(CPPFLAGS) $(CPPFLAGS_THR) $(CFLAGS) $<
 
 
+# The various make rules:
 make-cbin-rule   = $(CC) -o $@ $(CFLAGS) $^ $(LFLAGS) $(LIBS)
 make-cxxbin-rule = $(CXX) -o $@ $(CFLAGS) $(CXXFLAGS) $^ $(LFLAGS) $(LIBS)
 make-so-rule     = $(CC) -shared -o $@ $(CCSHARED) $(CFLAGS) $^ $(LFLAGS) $(LIBS)

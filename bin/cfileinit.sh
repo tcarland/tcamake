@@ -5,9 +5,8 @@
 #   A template for creating a source file with ifndef/define and 
 #   namespace declarations, if applicable.
 #
-VERSION="1.32"
-AUTHOR="tcarland@gmail.com"
 PNAME=${0##*\/}
+AUTHOR="tcarland@gmail.com"
 
 FILENAMES=
 SOURCENAME=
@@ -57,11 +56,11 @@ setDefineName()
     local Nr=
     local Er=
 
-    Sr="`echo $SOURCENAME | tr '[:lower:]' '[:upper:]'`"
-    Er="`echo $EXT | tr '[:lower:]' '[:upper:]'`"
+    Sr=$( echo $SOURCENAME | tr '[:lower:]' '[:upper:]' )
+    Er=$( echo $EXT | tr '[:lower:]' '[:upper:]' )
 
     if [ -n "$namespace" ]; then
-        Nr="`echo $namespace | tr '[:lower:]' '[:upper:]'`"
+        Nr=$( echo $namespace | tr '[:lower:]' '[:upper:]' )
         def="_${Nr}"
     fi
 

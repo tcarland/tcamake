@@ -3,9 +3,8 @@
 #   A script for projects that wish to be extracted or 
 #   distributed individually outside of the workspace. 
 #
-VERSION="1.18"
-AUTHOR="tcarland@gmail.com"
 PNAME=${0##*\/}
+AUTHOR="tcarland@gmail.com"
 
 PARENT=".."
 
@@ -174,19 +173,15 @@ doDist()
     fi
 
     echo "$RSYNC $options ./ $dstpath"
-    $RSYNC $options ./ $dstpath
+    
+    ( $RSYNC $options ./ $dstpath )
 
-    return 0
+    return $?
 }
 
 
 
-
-if [ -z "$1" ]; then
-    usage
-    exit 0
-fi
-
+action=
 
 while [ $# -gt 0 ]; do
     case "$1" in
@@ -199,12 +194,18 @@ while [ $# -gt 0 ]; do
             shift
             ;;
          *)
-            break
+            action="$1"
             ;;
     esac
+    shift
 done
+
+if [ -z "$action" ]; then
+    usage
+    exit 0
+fi
         
-case "$1" in
+case "$action" in
      'dist')
         DODIST=1
         ;;

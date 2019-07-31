@@ -3,12 +3,12 @@
 #   Build script for one-time building of external libraries.
 #
 
-PWD=`pwd`
+PWD=$(pwd)
 
 BUILTFILE=".external"
 INITFILE=".init"
 TARGETLIST="all"
-retval=
+rt=
 
 
 check_state()
@@ -26,27 +26,28 @@ check_autoconf()
         return 0
     fi
 
-    make update-autoconf
-    retval=$?
-    if [ $retval -ne 0 ]; then
+    ( make update-autoconf )
+
+    rt=$?
+    if [ $rt -ne 0 ]; then
         touch ${PWD}/${INITFILE}
     fi
 
-    return 1
+    return $rt
 }
 
 build_targets()
 {
     for target in $TARGETLIST; do
         make $target
-        retval=$?
+        rt=$?
     
-        if [ $retval -ne 0 ]; then
+        if [ $rt -ne 0 ]; then
             echo "Error building external libraries."
-            return $result
+            return $rt
         fi
     done
-    return 0
+    return $rt
 }
 
 
@@ -54,12 +55,12 @@ if [ -n "$1" ]; then
 
     TARGETLIST="$1"
     build_targets
-    retval=$?
+    rt=$?
 
 else
 
     check_state
-    retval=$?
+    rt=$?
 
     if [ $retval -eq 0 ]; then
         echo "External dependencies already built. Skipping..."
@@ -68,9 +69,9 @@ else
 
     check_autoconf
     build_targets
-    retval=$?
+    rt=$?
  
-    if [ $retval -ne 0 ]; then
+    if [ $rt -ne 0 ]; then
         echo "Error building external libraries."
     else
         echo "External libraries built..."
@@ -80,5 +81,5 @@ else
 fi
 
 
-exit $retval
+exit $rt
 

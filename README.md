@@ -2,7 +2,7 @@ tcamake
 =======
 
 ***Author***  tcarland@gmail.com  
-***Version*** 20181126
+***Version*** v0.2.1 - 20190731 
 
 
 ### Overview:
