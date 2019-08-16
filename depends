@@ -160,7 +160,7 @@ else
   RDKAFKA_HOME = /usr
   INCLUDES    += -I$(RDKAFKA_HOME)/include/rdkafka
 endif
-  LIBS        += -lrdkafka++ -lrdkafka -lsasl2
+  LIBS        += -lrdkafka++ -lrdkafka -lsasl2 -lzstd
   MACROS      += -DRDKAFKA
 endif
 
