@@ -14,7 +14,7 @@ NEED_LIBDL = 1
 
 #-------------------#
 
-ifdef TNMS_DEBUG
+ifdef TCAMAKE_DEBUG
   OPT_FLAGS = -g
 endif
 
@@ -91,9 +91,9 @@ ifdef DISTDIR
 endif
 
 install:
-ifdef TNMS_PREFIX
-	@echo "Installing mylib to $(PREFIX)/lib"
-	$(RSYNC) --delete include/ $(PREFIX)/include/mylib/
-	$(RSYNC) lib/ $(PREFIX)/lib/
+ifdef TCAMAKE_PREFIX
+	@echo "Installing mylib to $(TCAMAKE_PREFIX)/lib"
+	$(RSYNC) --delete include/ $(TCAMAKE_PREFIX)/include/mylib/
+	$(RSYNC) lib/ $(TCAMAKE_PREFIX)/lib/
 endif
 

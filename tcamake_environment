@@ -1,6 +1,4 @@
-# tcamake/environment
-#
-#   Platform Environment
+#   tcamake_environment - platform CFLAGS
 #
 #   Timothy C. Arland <tcarland@gmail.com>
 #

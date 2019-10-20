@@ -1,4 +1,4 @@
-# depends
+#  tcamake_depends
 #
 #  This file is typically site customized for internal projects and dependencies.
 #
@@ -8,8 +8,8 @@ ifndef TCAMAKE_PROJECT_DEPENDS
 endif
 
 # Global defines and compile options
-ifndef TCAMAKE_DEPENDS
-  include $(TOPDIR)/tcamake/tcamake_depends
+ifndef TCAMAKE_VERSION
+  include $(TOPDIR)/tcamake/tcamake_defines
 endif
 
 #-------------------------------------------------------------------------

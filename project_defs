@@ -10,6 +10,8 @@
 # Definitions provided by Makefile before including this file.
 #
 # NOTE: *** The 'all' target should be defined before including this file.
+# Additional customizations via the variables below should also be set 
+# prior to including this 'project_defs' file.
 #
 #   L_TARGET:    A library target
 #   L_OBJS:      Objects that make up L_TARGET
@@ -41,6 +43,6 @@
 #                   the affected .d files to rebuild.
 #
 
-include $(TOPDIR)/tcamake/environment
-include $(TOPDIR)/tcamake/tcamake_depends
+include $(TOPDIR)/tcamake/tcamake_environment
+include $(TOPDIR)/tcamake/tcamake_defines
 

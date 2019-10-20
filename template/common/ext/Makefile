@@ -11,7 +11,7 @@ all: zlib net-snmp libxml2
 
 help:
 	@echo "Make targets are required to build external libs as needed. "
-	@echo "Available make targets: net-snmp mysqlpp udplibrary zlib libxml2"
+	@echo "Available make targets: net-snmp mysqlpp zlib libxml2"
 
 
 net-snmp:
@@ -47,7 +47,6 @@ openssl:
 
 clean:
 	( cd net-snmp-5.2.3; make clean )
-	( cd mysqlpp/mysql++-1.7.40; make clean )
 	@echo
 
 distclean:
@@ -60,10 +59,6 @@ distclean:
 	( cd zlib; make distclean )
 	if [ -f libxml2/Makefile ]; then\
 		( cd libxml2; make distclean ) \
-	fi
-	#( cd openssl; make clean )
-	if [ -f mysql++-1.7.40/Makefile ]; then \
-		( cd mysql++-1.7.40; make distclean ) \
 	fi
 	@echo
 

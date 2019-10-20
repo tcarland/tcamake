@@ -1,14 +1,11 @@
 #
-#  tcamake_depends
+#  tcamake_defines
 #
 #  Global compile options and defines. Pulls in project 
 #  defines via 'depends'
 #
 
-ifndef TCAMAKE_DEPENDS
-  TCAMAKE_DEPENDS=1
-  TCAMAKE_VERSION="v0.2.1"
-endif
+export TCAMAKE_VERSION="v0.2.1"
 
 #-------------------------------------------------------------------------
 
