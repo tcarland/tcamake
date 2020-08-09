@@ -1,6 +1,6 @@
 # tcamake/build_defs
 #
-#   To be included by a Top-Level Makefile or TOPDIR.
+# To be included by a Top-Level Makefile or TOPDIR.
 # Use 'project_defs' for a project level Makefile.
 
 # flag for preferring dependencies defined in local repo space.

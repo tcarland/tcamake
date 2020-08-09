@@ -45,7 +45,7 @@ case, '~/src/repo/tcamake'.
 TOPDIR environment variable to point to the relative root of the workspace.
 Additionally, each Makefile must include **$TOPDIR/tcamake/project_defs**,
 though this should include should occur **after** setting any custom
-options as shown in the beelow example:
+options as shown in the below example:
 ```
 TOPDIR = ..
 
@@ -127,23 +127,22 @@ The Makefile hierarchy includes the following files:
     It pulls in both the dependencies and the platform environment via the
     'depends' and 'environment' files respectively.
 
- * **depends**  
+ * **tcamake_depends**  
     The file for defining all project dependencies. This is the only file
     that should need updating. Since these dependencies generate our **INCLUDE**
     and **LIB** variables, order can be important.  In general, the order should
     sort projects with the most dependencies before projects with the least
     dependencies.  
 
- * **autodepend**  
+ * **tcamake_autodepend**  
     An internal file for defining build commands and is the last file included
     by 'depends'.  This file should NOT need to be modified.
 
- * **environment**  
-    This is included automatically for each project by **project_defs**
-    to initiate the platform's desired compiler flags and other
-    platform specific macros.
+ * **tcamake_env**  
+    This is included automatically for each project to initiate the 
+    platform's desired compiler flags and other platform specific macros.
     This file should NOT need to be modified other than to add new
-    dependencies or platform environment profiles.
+    platform environment profiles.
 
 
 ### Scripts:

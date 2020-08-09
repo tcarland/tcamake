@@ -6,6 +6,10 @@
 #
 export TCAMAKE_VERSION="v2020.08"
 
+ifndef TCAMAKE_ENV
+    include $(TOPDIR)/tcamake/tcamake_env 
+endif
+
 #-------------------------------------------------------------------------
 
 RM = rm -rf
