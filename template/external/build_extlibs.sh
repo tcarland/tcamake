@@ -41,7 +41,7 @@ build_targets()
     for target in $TARGETLIST; do
         make $target
         rt=$?
-    
+
         if [ $rt -ne 0 ]; then
             echo "Error building external libraries."
             return $rt
@@ -70,7 +70,7 @@ else
     check_autoconf
     build_targets
     rt=$?
- 
+
     if [ $rt -ne 0 ]; then
         echo "Error building external libraries."
     else
@@ -82,4 +82,3 @@ fi
 
 
 exit $rt
-

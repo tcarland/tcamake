@@ -56,11 +56,11 @@ setDefineName()
     local Nr=
     local Er=
 
-    Sr=$( echo $SOURCENAME | tr '[:lower:]' '[:upper:]' )
-    Er=$( echo $EXT | tr '[:lower:]' '[:upper:]' )
+    Sr=${SOURCENAME^^}
+    Er=${EXT^^}
+    Nr=${namespace^^}
 
     if [ -n "$namespace" ]; then
-        Nr=$( echo $namespace | tr '[:lower:]' '[:upper:]' )
         def="_${Nr}"
     fi
 
@@ -77,48 +77,53 @@ createHeader()
     local define=$3
     local namespace=$4
 
-    echo "/**" > $filename
-    echo "  * @file ${filename} " >> $filename
-    echo "  * @author " >> $filename
-    echo "  * " >> $filename
-    echo " **/" >> $filename
+    cat >$filename <<EOF
+/**
+  * @file ${filename}
+  * @author 
+  * 
+ **/
+#ifndef $define
+#define $define
 
-    echo "#ifndef $define" >> $filename
-    echo "#define $define" >> $filename
-    echo "" >> $filename
-
+EOF
     if [ -n "$namespace" ]; then
-        echo "" >> $filename
-        echo "namespace ${namespace} {" >> $filename
-        echo "" >> $filename
-    fi
+        cat >>$filename <<EOF
 
-    echo "" >> $filename
+namespace ${namespace} {
+
+EOF
+    fi
 
     if [ -n "$CLASS" ]; then
-        echo "" >> $filename
-        echo "class ${srcname} {" >> $filename
-        echo "" >> $filename
-        echo "  public:" >> $filename
-        echo "" >> $filename
-        echo "    ${srcname}();" >> $filename
-        echo "" >> $filename
-        echo "    ~${srcname}();" >> $filename
-        echo "" >> $filename
-        echo "};" >> $filename
-        echo "" >> $filename
+        cat >>$filename <<EOF
+ 
+ class ${srcname} {
+ 
+   public:
+        
+    ${srcname}();
+    ~${srcname}();
+        
+};
+
+EOF
     fi
-    echo "" >> $filename
 
     if [ -n "$namespace" ]; then
-        echo "" >> $filename
-        echo "}  // namespace" >> $filename
-        echo "" >> $filename
+        cat >>$filename <<EOF
+
+}  // namespace
+EOF
     fi
 
-    echo "" >> $filename
-    echo "#endif  // $define" >> $filename
+    cat >>$filename <<EOF
+    
+#endif  // $define
+EOF
+    return
 }
+
 
 # The template definition for source files
 createSource()
@@ -128,47 +133,45 @@ createSource()
     local define=$3
     local namespace=$4
 
-    echo "/**" > $filename
-    echo "  * @file ${filename} " >> $filename
-    echo "  * @author " >> $filename
-    echo "  * " >> $filename
-    echo " **/" >> $filename
+    cat >$filename <<EOF
+/**
+  * @file ${filename}
+  * @author 
+  * 
+ **/
+#define $define
 
-    echo "#define $define" > $filename
-    echo "" >> $filename
-    echo "" >> $filename
-
+EOF
     if [ -n "$namespace" ]; then
-        echo "" >> $filename
-        echo "namespace ${namespace} {" >> $filename
-        echo "" >> $filename
-    fi
+        cat >>$filename <<EOF
+        
+namespace ${namespace} {
 
-    echo "" >> $filename
+EOF
+    fi
 
     if [ -n "$CLASS" ]; then
-        echo "" >> $filename
-        echo "${srcname}::${srcname}()" >> $filename
-        echo "{" >> $filename
-        echo "}" >> $filename
-        echo "" >> $filename
-        echo "${srcname}::~${srcname}()" >> $filename
-        echo "{" >> $filename
-        echo "}" >> $filename
-        echo "" >> $filename
-    fi
+        cat >>$filename <<EOF
+        
+${srcname}::${srcname}() {}
+${srcname}::~${srcname}() {}
 
-    echo "" >> $filename
+EOF
+    fi
 
     if [ -n "$namespace" ]; then
-        echo "" >> $filename
-        echo "}  // namespace" >> $filename
-        echo "" >> $filename
+        cat >>$filename <<EOF
+        
+} // namespace
+
+EOF
     fi
 
-    echo "" >> $filename
+    cat >>$filename <<EOF
 
-    echo "// $define" >> $filename
+// $define
+EOF
+    return
 }
 
 

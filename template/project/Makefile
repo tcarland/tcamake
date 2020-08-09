@@ -6,7 +6,7 @@
 # TOPDIR is the relative path to our workspace root
 # where /tcamake should exist.
 #
-# The following ifdef is used for extracting the Makefile 
+# The following ifdef is used for extracting the project 
 # into a standalone project. See 'build.sh' for extracting
 # solo distributions.  In most cases this is not necessary, 
 # simply set TOPDIR to the relative root and compile.
@@ -18,8 +18,7 @@ endif
 
 # set requirements
 NEED_SOCKET = 1
-#NEED_ZLIB = 1
-#NEED_LIBXML2 = 1
+NEED_ZLIB = 1
 
 ifdef MYPROJECT_DEBUG
 OPT_FLAGS= 	-g

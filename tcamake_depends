@@ -1,10 +1,11 @@
 #  tcamake_depends
 #
-#  This file is typically site customized for internal projects and dependencies.
+#  This file is typically site customized for internal projects
+#  and dependencies.
 #
 
-ifndef TCAMAKE_PROJECT_DEPENDS
-  TCAMAKE_PROJECT_DEPENDS=1
+ifndef TCAMAKE_DEPENDS
+  TCAMAKE_DEPENDS=1
 endif
 
 # Global defines and compile options
@@ -126,7 +127,7 @@ ifdef NEED_TNMSAPI
   TNMSAPI    = $(TOPDIR)/TnmsApi
   INCLUDES  += -I$(TNMSAPI) -I$(TOPDIR)/tnmsCore/include -I$(TOPDIR)/tcanetpp/include -I$(TOPDIR)/tcaxmlpp/include
   LFLAGS    += -L$(TNMSAPI)/lib
-  LIBS      += -lTnmsApi 
+  LIBS      += -lTnmsApi
 endif
 
 
@@ -278,6 +279,5 @@ endif
 #-------------------------------------------------------------------------
 ## Do not edit below this line
 ifndef TCAMAKE_AUTODEPEND
-  include $(TOPDIR)/tcamake/autodepend
+  include $(TOPDIR)/tcamake/tcamake_autodepend
 endif
-

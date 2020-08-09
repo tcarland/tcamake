@@ -2,6 +2,7 @@
 #
 #   Timothy C. Arland <tcarland@gmail.com>
 #
+
 TCA_PORT_OS         := $(shell uname)
 TCA_PORT_MACHINE    := $(shell uname -m)
 TCA_PORT_IDENTIFIER := "$(TCA_PORT_OS)_$(TCA_PORT_MACHINE)"
@@ -21,7 +22,7 @@ ifeq ($(TCA_PORT_IDENTIFIER), "SunOS_sun4u")
   LIB_SOCKET     = -lsocket
   LIB_NSL        = -lnsl
   LIB_PTHREAD    = -lpthread
-  PTHREAD_CFLAGS = -pthread 
+  PTHREAD_CFLAGS = -pthread
   LIB_DL         = -ldl
 endif
 
@@ -90,4 +91,4 @@ endif
 CFLAGS          += $(CFLAGS_ADD)
 CXXFLAGS        += $(CXXFLAGS_ADD)
 
-
+TCAMAKE_ENVIRONMENT=$(TCA_PORT_IDENTIFIER)

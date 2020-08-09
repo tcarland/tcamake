@@ -38,7 +38,7 @@ findTopDirectory()
     local srcdir="$PWD"
     local curdir=""
     local result=""
-    
+
     RETVAL=1
 
     if [ -z "$BUILDDEF" ] || [ -z "$PARENT" ]; then
@@ -53,7 +53,7 @@ findTopDirectory()
         if [ -n "$result" ]; then
             RETVAL=0
         fi
-        
+
         if [ $RETVAL -eq 1 ]; then
             if [ "$TOPDIR" == "." ]; then
                 TOPDIR=""
@@ -65,7 +65,7 @@ findTopDirectory()
             TOPDIR="${TOPDIR}${PARENT}"
         fi
     done
-  
+
     # ensure we return to source directory
     cd $srcdir
 
@@ -97,7 +97,7 @@ createProject()
     local srcpath=
     local dstpath="$1/"
     local options="$OPTIONS"
-    
+
     if [ $DRYRUN -eq 1 ]; then
         options="${options} --dry-run"
     fi
@@ -110,26 +110,26 @@ createProject()
         echo "Failed to locate tcamake"
         return 1
     fi
-    
+
     srcpath="$TOPDIR/tcamake/template"
 
     isLib
     RETVAL=$?
 
     if [ $RETVAL -eq 0 ]; then
-        srcpath="$srcpath/common/libproject/"
+        srcpath="$srcpath/libproject/"
     else
         srcpath="$srcpath/project/"
     fi
 
     echo "$RSYNC $options $srcpath $dstpath"
-    
+
     ( $RSYNC $options $srcpath $dstpath )
     echo ""
 
     cd $dstpath
     findTopDirectory
-    
+
     RETVAL=0
     for subdir in $PATHLIST; do
         if [ ! -d $subdir ]; then
@@ -229,4 +229,3 @@ else
 fi
 
 exit $RETVAL
-

@@ -1,10 +1,10 @@
-# common/ext/Makefile 
-#  For building external libraries
+# external/Makefile
 #
-TOPDIR = ../..
+#  For building external libraries stored locally in our repo.
+#
+TOPDIR = ..
 
 include ${TOPDIR}/tcamake/builddefs
-
 
 all: zlib net-snmp libxml2
 
@@ -69,4 +69,3 @@ ifdef PREFIX
 		( mkdir $(PREFIX)/bin ) \
 	fi
 endif
-

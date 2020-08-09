@@ -1,6 +1,6 @@
 # tcamake/project_defs
 #
-#   A complete 'Makefile' build environment for including  platform
+#   A complete 'Makefile' build environment for including platform
 # dependencies.
 #
 # This file should be included by a project or any sub-level Makefiles.
@@ -10,8 +10,8 @@
 # Definitions provided by Makefile before including this file.
 #
 # NOTE: *** The 'all' target should be defined before including this file.
-# Additional customizations via the variables below should also be set 
-# prior to including this 'project_defs' file.
+# Additional customization via the variables below should also be set
+# *prior* to including 'project_defs' (this file).
 #
 #   L_TARGET:    A library target
 #   L_OBJS:      Objects that make up L_TARGET
@@ -32,7 +32,7 @@
 #
 #   makebindep-cmd: Use after a link rule.  Expects $(LFLAGS) and $(LIBS)
 #                   to include all the libraries that go into the build.
-#                   The library dependencies will be written out to 
+#                   The library dependencies will be written out to
 #                   <target>.bd.
 #   makedep-prefix:
 #   makedep-precmd: These two are used in combination when building a .o
@@ -45,4 +45,3 @@
 
 include $(TOPDIR)/tcamake/tcamake_environment
 include $(TOPDIR)/tcamake/tcamake_defines
-

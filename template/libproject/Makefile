@@ -1,12 +1,6 @@
-#  tcamake template for a common library
+#  tcamake template for a library
 #
-
-# this ifdef allows the library to be a standalone distribution
-# (this requires ./tcamake/ to exist (use a symlink)
-#
-ifndef TOPDIR
-  TOPDIR = ../..
-endif
+TOPDIR = ..
 
 # build requirements
 NEED_PTHREADS = 1
@@ -28,9 +22,9 @@ LIBS =
 
 OBJS =		    src/mylib.o
 TEST_OBJS =	    src/test.o
-                    
+
 BIN =		    mylibtest
-ALL_OBJS =	    $(OBJS) $(TEST_OBJS) 
+ALL_OBJS =	    $(OBJS) $(TEST_OBJS)
 ALL_BINS = 	    $(BIN)
 
 
@@ -74,7 +68,7 @@ clean:
 	$(RM) $(ALL_OBJS) \
 	src/*.d src/*.D src/*.bd src/*.o lib/*.bd *.bd
 	@echo
-	
+
 testclean:
 	( cd test; $(MAKE) distclean )
 	@echo
@@ -96,4 +90,3 @@ ifdef TCAMAKE_PREFIX
 	$(RSYNC) --delete include/ $(TCAMAKE_PREFIX)/include/mylib/
 	$(RSYNC) lib/ $(TCAMAKE_PREFIX)/lib/
 endif
-

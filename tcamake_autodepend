@@ -1,8 +1,6 @@
-# tcamake/autodepend
+# tcamake_autodepend
 #
-#   This file is included internally and should not need editing.
-#
-#   Timothy C. Arland <tcarland@gmail.com>
+#   This file provides macros used internally and should not be modified.
 #
 #------------------------------------------------------------------------
 #  Do not edit below this line unless prepared to deal with the breakage.
@@ -29,13 +27,11 @@ endif
 %.to: %.S
 	$(CC) -o $@ -c $(CPPFLAGS) $(CPPFLAGS_THR) $(CFLAGS) $<
 
-
 # The various make rules:
 make-cbin-rule   = $(CC) -o $@ $(CFLAGS) $^ $(LFLAGS) $(LIBS)
 make-cxxbin-rule = $(CXX) -o $@ $(CFLAGS) $(CXXFLAGS) $^ $(LFLAGS) $(LIBS)
 make-so-rule     = $(CC) -shared -o $@ $(CCSHARED) $(CFLAGS) $^ $(LFLAGS) $(LIBS)
-make-lib-rule    = ld -r -o $@ $^; 
-
+make-lib-rule    = ld -r -o $@ $^;
 
 ifdef L_TARGET
 $(L_TARGET): $(L_OBJS)
@@ -51,4 +47,3 @@ ifdef TXX_TARGETS
 $(TXX_TARGETS): $(TXX_TARGETS:=.o) $(L_TARGET)
 	$(CXX) $(CFLAGS) -o $@ $(@:=.o) $(L_TARGET) $(LFLAGS) $(LIBS)
 endif
-

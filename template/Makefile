@@ -1,13 +1,11 @@
 # ------------------------
 #  Top-level Makefile
 #
-
 include ./tcamake/build_defs
 
 # ------------------------
 
 all: print-env external common project
-
 
 print-env:
 	@uname -a

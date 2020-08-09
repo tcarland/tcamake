@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-#   A script for projects that wish to be extracted or 
-#   distributed individually outside of the workspace. 
+#   A script for projects that wish to be extracted or
+#   distributed individually outside of the workspace.
 #
 PNAME=${0##*\/}
 AUTHOR="tcarland@gmail.com"
@@ -9,7 +9,7 @@ AUTHOR="tcarland@gmail.com"
 PARENT=".."
 
 LINKLIST="tcamake"
-TMDEPFILE="tcamake_depends"
+DEPFILE="tcamake_depends"
 RSYNC="rsync"
 OPTIONS="-avL --delete --exclude=.cvs --exclude=.svn --exclude=.hg --exclude=.git "
 DRYRUN="--dry-run"
@@ -35,7 +35,7 @@ usage()
     echo "                following commands."
     echo ""
     echo "       -h|--help   : displays this help"
-    echo "       -n|--dryrun : enables dry-run test mode" 
+    echo "       -n|--dryrun : enables dry-run test mode"
     echo ""
     echo "       'dist' [path/project] "
     echo "                   : Creates a distribution copy in the"
@@ -46,12 +46,11 @@ usage()
     echo "       'show'      : shows the determined project root and "
     echo "                     what links would be created. (dry run) "
     echo ""
-    echo " Summary: Creates a complete distribution directory that"
-    echo " includes any required project paths by creating temporary "
-    echo " soft links. Any unrecognized commands are passed through"
-    echo " to 'make'."
+    echo " Creates a distribution directory that includes any required "
+    echo " project paths by creating links."
+    echo " Any unrecognized commands are passed through to 'make'."
     echo " Additional project links can be defined by setting the "
-    echo " EnvVar TCAMAKE_BUILD_LINKS to the list of relative paths"
+    echo " variable TCAMAKE_BUILD_LINKS to the list of relative paths"
     echo " from TOPDIR.";
     echo ""
     echo "  $PNAME: Version: $VERSION by $AUTHOR"
@@ -63,16 +62,16 @@ findTopDirectory()
 {
     local srcdir="$PWD"
     local result=""
-    
+
     retval=0
 
     while [ $retval -eq 0 ]
     do
-        result=$(find . -name "$TMDEPFILE")
+        result=$(find . -name "$DEPFILE")
         if [ -n "$result" ]; then
             retval=1
         fi
-        
+
         if [ $retval -eq 0 ]; then
             if [ $TOPDIR == "." ]; then
                 TOPDIR=""
@@ -84,7 +83,7 @@ findTopDirectory()
             TOPDIR="${TOPDIR}${PARENT}"
         fi
     done
-  
+
     cd $srcdir
 
     if [ -z "$TOPDIR" ]; then
@@ -112,7 +111,7 @@ clearLinks()
 makeLinks()
 {
     echo "  <tcamake> generating links: $LINKLIST "
-    
+
     for lf in $LINKLIST; do
         echo "  ln -s $TOPDIR/$lf ."
         ( ln -s "$TOPDIR/$lf" )
@@ -173,7 +172,7 @@ doDist()
     fi
 
     echo "$RSYNC $options ./ $dstpath"
-    
+
     ( $RSYNC $options ./ $dstpath )
 
     return $?
@@ -204,7 +203,7 @@ if [ -z "$action" ]; then
     usage
     exit 0
 fi
-        
+
 case "$action" in
      'dist')
         DODIST=1

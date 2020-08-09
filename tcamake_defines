@@ -1,11 +1,10 @@
 #
 #  tcamake_defines
 #
-#  Global compile options and defines. Pulls in project 
+#  Global compile options and defines. Pulls in project
 #  defines via 'depends'
 #
-
-export TCAMAKE_VERSION="v0.2.1"
+export TCAMAKE_VERSION="v2020.08"
 
 #-------------------------------------------------------------------------
 
@@ -57,7 +56,6 @@ endif
 
 #-------------------------------------------------------------------------
 # Do not edit below this line
-ifndef TCAMAKE_PROJECT_DEPENDS
-  include $(TOPDIR)/tcamake/depends
+ifndef TCAMAKE_DEPENDS
+  include $(TOPDIR)/tcamake/tcamake_depends
 endif
-

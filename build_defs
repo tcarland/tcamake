@@ -1,25 +1,21 @@
 # tcamake/build_defs
-#   To be included by the Top-Level Makefile or TOPDIR.
+#
+#   To be included by a Top-Level Makefile or TOPDIR.
 # Use 'project_defs' for a project level Makefile.
 
+# flag for preferring dependencies defined in local repo space.
 export TCAMAKE_PROJECT="true"
 
 # Additional variables used by the build system or for projects
 # can be set here. Some examples:
-#
-# generally we wouldn't set this globally here but source from 
-# within our project at build time
-#export TCAMAKE_DEBUG = 1
 
-# The install prefix that can be used within the 'make install' target. 
+# The install prefix that can be used within the 'make install' target.
 #TCAMAKE_PREFIX="${HOME}/tnms"
 
-# Includes can be controlled across projects by defining a few 
+# Includes can be controlled across projects by defining a few
 # USE_xx flags.
-# Define these in your top-level Makefile or project Makefile 
+# Define these in your top-level Makefile or project Makefile
 # eg.
-# USE_MYSQL=1  
+# USE_MYSQL=1
 # USE_PTHREADS=1
 # USE_LIBRT=1
-
-
