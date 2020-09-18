@@ -10,18 +10,18 @@ ifndef TCAMAKE_AUTODEPEND
 endif
 
 %.o: %.cc
-	$(CXX) -o $@ -c $(CPPFLAGS) $(CFLAGS) $<
+	$(CXX) -o $@ -c $(CPPFLAGS) $(CFLAGS) $(CXXFLAGS) $<
 %.o: %.cpp
-	$(CXX) -o $@ -c $(CPPFLAGS) $(CFLAGS) $<
+	$(CXX) -o $@ -c $(CPPFLAGS) $(CFLAGS) $(CXXFLAGS) $<
 %.o: %.c
 	$(CC) -o $@ -c $(CPPFLAGS) $(CFLAGS) $<
 %.o: %.S
 	$(CC) -o $@ -c $(CPPFLAGS) $(CFLAGS) $<
 
 %.to: %.cc
-	$(CXX) -o $@ -c $(CPPFLAGS) $(CPPFLAGS_THR) $(CFLAGS) $<
+	$(CXX) -o $@ -c $(CPPFLAGS) $(CPPFLAGS_THR) $(CFLAGS) $(CXXFLAGS) $<
 %.to: %.cpp
-	$(CXX) -o $@ -c $(CPPFLAGS) $(CPPFLAGS_THR) $(CFLAGS) $<
+	$(CXX) -o $@ -c $(CPPFLAGS) $(CPPFLAGS_THR) $(CFLAGS) $(CXXFLAGS) $<
 %.to: %.c
 	$(CC) -o $@ -c $(CPPFLAGS) $(CPPFLAGS_THR) $(CFLAGS) $<
 %.to: %.S
@@ -45,5 +45,5 @@ endif
 
 ifdef TXX_TARGETS
 $(TXX_TARGETS): $(TXX_TARGETS:=.o) $(L_TARGET)
-	$(CXX) $(CFLAGS) -o $@ $(@:=.o) $(L_TARGET) $(LFLAGS) $(LIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $(@:=.o) $(L_TARGET) $(LFLAGS) $(LIBS)
 endif

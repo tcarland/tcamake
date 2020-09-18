@@ -4,7 +4,7 @@
 #  Global compile options and defines. Pulls in project
 #  defines via 'depends'
 #
-export TCAMAKE_VERSION="v2020.08"
+export TCAMAKE_VERSION="v20.09"
 
 ifndef TCAMAKE_ENV
     include $(TOPDIR)/tcamake/tcamake_env 
@@ -28,7 +28,7 @@ ifndef OPT_FLAGS
 endif
 
 ifndef CPPFLAGS
-  CPPFLAGS = -Wall ${INCLUDES} ${MACROS}
+  CPPFLAGS = -Wall ${INCLUDES} ${MACROS} 
 endif
 
 ifndef CPPFLAGS_THR
