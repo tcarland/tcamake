@@ -7,7 +7,8 @@
 #
 # $(TOPDIR) must be set by the source Makefile.
 #
-# Definitions provided by Makefile before including this file.
+# Definitions provided by the Makefile should be defined prior to the 
+# include statement to include this file.
 #
 # NOTE: *** The 'all' target should be defined before including this file.
 # Additional customization via the variables below should also be set
@@ -17,6 +18,8 @@
 #   L_OBJS:      Objects that make up L_TARGET
 #   T_TARGETS:   C programs that use L_TARGET
 #   TXX_TARGETS: C++ programs that use L_TARGET
+#   CFLAGS:      Compile-time flags to add to `gcc`
+#   CXXFLAGS:    Compile-time flags to add to `g++`
 #   OPT_FLAGS:   Optimization settings (-g, -g -O2, -O, ...)
 #   INCLUDES:    Include flags
 #   MACROS:      Definitions
@@ -43,5 +46,5 @@
 #                   the affected .d files to rebuild.
 #
 
-include $(TOPDIR)/tcamake/tcamake_env
-include $(TOPDIR)/tcamake/tcamake_defines
+#include $(TOPDIR)/tcamake/tcamake_env
+include $(TOPDIR)/tcamake/tcamake_include

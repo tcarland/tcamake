@@ -2,7 +2,7 @@ tcamake
 =======
 
 ***Author***  tcarland@gmail.com  
-***Version***  20.09
+***Version***  20.10
 
 
 ### Overview:
@@ -49,17 +49,17 @@ options as shown in the below example:
 ```
 TOPDIR = ..
 
-# set requirements
+# requirements
 NEED_SOCKET = 1
 NEED_ZLIB = 1
 NEED_KAFKA = 1
 
-ifdef MYPROJECT_DEBUG
+ifdef TCAMAKE_DEBUG
 OPT_FLAGS= 	-g
 endif
 
 # custom lib/includes
-INCLUDES=       -Iinclude
+INCLUDES=   -Iinclude
 LIBS=
 
 BIN=		mybin
@@ -70,7 +70,10 @@ ALL_BINS=	$(BIN)
 
 all: mybin test
 
+# Include tcamake 'project_defs' after all custom defines
 include $(TOPDIR)/tcamake/project_defs
+
+# ---------------
 
 mybin: $(OBJS)
 	$(make-cxxbin-rule)
@@ -89,9 +92,9 @@ distclean: clean
 	@echo
 
 install:
-ifdef PROJECT_PREFIX
+ifdef TCAMAKE_PREFIX
 	@echo "Installing $BIN"
-    $(CP) $BIN $PROJECT_PREFIX/bin
+    $(CP) $BIN $TCAMAKE_PREFIX/bin
 endif
 ```
 
@@ -102,8 +105,8 @@ Makefile template installed by using the project init script:
 
   A given build environment could potentially have more than one top-level
 directory. Each top-level is essentially a *Makefile* that includes
-`./tcamake/build_defs`. This allows some global project settings that other
-projects can use (eg. USE_MYSQL).
+`${TOPDIR}/tcamake/build_defs`. This allows some global project settings 
+that other projects can use (eg. USE_MYSQL).
 
   The environment variable **TCAMAKE_PROJECT** reflects that a tcamake build
 repository exists which can be used by sub-level Makefiles that wish to
@@ -127,22 +130,26 @@ The Makefile hierarchy includes the following files:
     It pulls in both the dependencies and the platform environment via the
     'depends' and 'environment' files respectively.
 
- * **tcamake_depends**  
-    The file for defining all project dependencies. This is the only file
-    that should need updating. Since these dependencies generate our **INCLUDE**
-    and **LIB** variables, order can be important.  In general, the order should
-    sort projects with the most dependencies before projects with the least
-    dependencies.  
-
- * **tcamake_autodepend**  
-    An internal file for defining build commands and is the last file included
-    by 'depends'.  This file should NOT need to be modified.
+ * **tcamake_include**  
+    This is the primary *include* file the tcamake framework. This gets 
+    included by *project_defs* which is the entrypoint as described above.
 
  * **tcamake_env**  
-    This is included automatically for each project to initiate the 
+    This is included automatically for each project to initiate the
     platform's desired compiler flags and other platform specific macros.
     This file should NOT need to be modified other than to add new
     platform environment profiles.
+
+ * **tcamake_depends**  
+    The file for defining all project dependencies. This is the only file
+    that should need updating. Since these dependencies generate our 
+    compile-time **INCLUDE** and **LIB** variables, order can be important.  
+    As a general rule, the order should sort projects with the most 
+    dependencies before projects with the least dependencies.  
+
+ * **tcamake_autodepend**  
+    An internal file for defining build commands and is the last file included
+    by 'depends'. This file should NOT need to be modified.
 
 
 ### Scripts:
