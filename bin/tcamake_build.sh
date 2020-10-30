@@ -7,7 +7,6 @@ PNAME=${0##*\/}
 AUTHOR="tcarland@gmail.com"
 
 PARENT=".."
-
 LINKLIST="tcamake"
 DEPFILE="tcamake_depends"
 RSYNC="rsync"
@@ -52,8 +51,6 @@ usage()
     echo " Additional project links can be defined by setting the "
     echo " variable TCAMAKE_BUILD_LINKS to the list of relative paths"
     echo " from TOPDIR.";
-    echo ""
-    echo "  $PNAME: Version: $VERSION by $AUTHOR"
     echo ""
 }
 
@@ -184,7 +181,7 @@ action=
 
 while [ $# -gt 0 ]; do
     case "$1" in
-        -h|--help)
+        'help'|-h|--help)
             usage
             exit 0
             ;;

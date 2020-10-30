@@ -42,7 +42,7 @@ distclean: external-clean
 	@echo
 
 install:
-ifdef PREFIX
+ifdef TCAMAKE_PREFIX
 	( cd common; make install )
 	( cd project; make install )
 	@echo

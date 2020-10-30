@@ -52,6 +52,10 @@ lib/libmylib.so.0.0.1: ${OBJS}
 	( mv $@ lib/; cd lib; ln -s $@ libmylib.so )
 	@echo
 
+.PHONY: docs 
+docs: documentation
+pdf: documentation 
+
 documentation:
 	(cd docs; ${MAKE} ${MFLAGS} ${MVARS} all )
 	@echo

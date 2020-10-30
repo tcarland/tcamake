@@ -46,5 +46,4 @@
 #                   the affected .d files to rebuild.
 #
 
-#include $(TOPDIR)/tcamake/tcamake_env
 include $(TOPDIR)/tcamake/tcamake_include

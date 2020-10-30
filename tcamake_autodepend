@@ -27,6 +27,9 @@ endif
 %.to: %.S
 	$(CC) -o $@ -c $(CPPFLAGS) $(CPPFLAGS_THR) $(CFLAGS) $<
 
+%.pdf: %.md
+	$(PANDOC) $(PDFLAGS) $< -o $@
+
 # The various make rules:
 make-cbin-rule   = $(CC) -o $@ $(CFLAGS) $^ $(LFLAGS) $(LIBS)
 make-cxxbin-rule = $(CXX) -o $@ $(CFLAGS) $(CXXFLAGS) $^ $(LFLAGS) $(LIBS)
@@ -47,3 +50,4 @@ ifdef TXX_TARGETS
 $(TXX_TARGETS): $(TXX_TARGETS:=.o) $(L_TARGET)
 	$(CXX) $(CXXFLAGS) -o $@ $(@:=.o) $(L_TARGET) $(LFLAGS) $(LIBS)
 endif
+

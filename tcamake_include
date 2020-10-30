@@ -1,10 +1,11 @@
 #
-#  tcamake_defines
+#  tcamake_include
 #
 #  Global compile options and defines. Pulls in project
-#  defines via 'depends'
+#  dependencies via 'tcamake_depends'
 #
-export TCAMAKE_VERSION="v20.10"
+
+export TCAMAKE_VERSION="v20.11"
 
 ifndef TCAMAKE_ENV
     include $(TOPDIR)/tcamake/tcamake_env
@@ -16,7 +17,8 @@ RM = rm -rf
 CP = cp --preserve
 MKDIR = mkdir -p
 RSYNC = rsync -av
-RDIST = rsync -avL --delete --exclude=.cvs --exclude=.svn --exclude=.hg
+RDIST = rsync -avL --delete --exclude=.git --exclude=.svn --exclude=.cvs
+PANDOC = pandoc -s
 
 CXX = g++
 CC = gcc
@@ -56,6 +58,10 @@ endif
 ifdef TXX_TARGETS
   ALL_OBJS += $(TXX_TARGETS:=.o)
   ALL_BINS += $(TXX_TARGETS)
+endif
+
+ifndef PDFLAGS
+    PDFLAGS = -V geometry:margin=1in -f markdown-implicit_figures
 endif
 
 #-------------------------------------------------------------------------

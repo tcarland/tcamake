@@ -18,7 +18,7 @@ CLASS=1
 
 version()
 {
-    echo "$PNAME, Version $VERSION, $AUTHOR"
+    echo "$PNAME, $AUTHOR"
     echo ""
 }
 

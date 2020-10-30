@@ -28,13 +28,6 @@ usage()
     return 0
 }
 
-version()
-{
-    echo "$PNAME, Version $VERSION, $AUTHOR"
-    echo ""
-}
-
-
 setBasename()
 {
     local curdir=$(pwd)
