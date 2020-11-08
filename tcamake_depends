@@ -50,8 +50,8 @@ else
     TCANETPP_HOME = /usr/local
     INCLUDES     += -I$(TCANETPP_HOME)/include/tcanetpp
 endif
-  LFLAGS += -L$(TCANETPP_HOME)/lib
-  LIBS   += -ltcanetpp
+    LFLAGS += -L$(TCANETPP_HOME)/lib
+    LIBS   += -ltcanetpp
 endif
 
 
@@ -63,8 +63,8 @@ else
     TCANETPP_HOME = /usr/local
     INCLUDES     += -I$(TCANETPP_HOME)/include/tcanetpp
 endif
-  LFLAGS += -L$(TCANETPP_HOME)/lib
-  LIBS   += -lcmdbuf
+    LFLAGS += -L$(TCANETPP_HOME)/lib
+    LIBS   += -lcmdbuf
 endif
 
 
@@ -76,8 +76,8 @@ else
     TCASQL_HOME = /usr/local
     INCLUDES   += -I$(TCASQL_HOME)/include/tcasqlpp
 endif
- LFLAGS += -L$(TCASQL_HOME)/lib
- LIBS   += -ltcasqlpp
+   LFLAGS += -L$(TCASQL_HOME)/lib
+   LIBS   += -ltcasqlpp
 endif
 
 
@@ -89,34 +89,34 @@ else
     TCASNMP_HOME = /usr/local
     INCLUDES    += -I$(TCASNMP_HOME)/include/tcasnmp
 endif
-  LFLAGS += -L$(TCASNMP_HOME)/lib
-  LIBS   += -ltcasnmp
+    LFLAGS += -L$(TCASNMP_HOME)/lib
+    LIBS   += -ltcasnmp
 endif
 
 
 ifdef NEED_HEXES
 ifdef TCAMAKE_PROJECT
-  HEXESHOME = $(TOPDIR)/libhexes
-  INCLUDES += -I$(HEXESHOME)/include
+    HEXESHOME = $(TOPDIR)/libhexes
+    INCLUDES += -I$(HEXESHOME)/include
 else
-  HEXESHOME = /usr/local
-  INCLUDES += -I$(HEXESHOME)/include/hexes
+    HEXESHOME = /usr/local
+    INCLUDES += -I$(HEXESHOME)/include/hexes
 endif
-  LFLAGS   += -L$(HEXESHOME)/lib
-  LIBS     += -lhexes
+    LFLAGS   += -L$(HEXESHOME)/lib
+    LIBS     += -lhexes
 endif
 
 
 ifdef NEED_TCAJSON
 ifdef TCAMAKE_PROJECT
-  TCAJSON_HOME = $(TOPDIR)/tcajson
-  INCLUDES   += -I$(TCAJSON_HOME)/include
+    TCAJSON_HOME = $(TOPDIR)/tcajson
+    INCLUDES   += -I$(TCAJSON_HOME)/include
 else
-  TCAJSON_HOME = /usr/local
-  INCLUDES   += -I$(TCAJSON_HOME)/include/tcajson
+    TCAJSON_HOME = /usr/local
+    INCLUDES   += -I$(TCAJSON_HOME)/include/tcajson
 endif
-  LFLAGS  += -L$(TCAJSON_HOME)/lib
-  LIBS    += -ltcajson
+    LFLAGS  += -L$(TCAJSON_HOME)/lib
+    LIBS    += -ltcajson
 endif
 
 #-------------------------------------------------------------------------
@@ -124,27 +124,26 @@ endif
 #-------------------------------------------------------------------------
 
 ifdef NEED_TNMSAPI
-  TNMSAPI    = $(TOPDIR)/TnmsApi
-  INCLUDES  += -I$(TNMSAPI) -I$(TOPDIR)/tnmsCore/include -I$(TOPDIR)/tcanetpp/include -I$(TOPDIR)/tcaxmlpp/include
-  LFLAGS    += -L$(TNMSAPI)/lib
-  LIBS      += -lTnmsApi
+    TNMSAPI    = $(TOPDIR)/TnmsApi
+    INCLUDES  += -I$(TNMSAPI) -I$(TOPDIR)/tnmsCore/include -I$(TOPDIR)/tcanetpp/include -I$(TOPDIR)/tcaxmlpp/include
+    LFLAGS    += -L$(TNMSAPI)/lib
+    LIBS      += -lTnmsApi
 endif
 
 
 ifdef NEED_TNMSCORE
-  TNMSCORE  = $(TOPDIR)/tnmsCore
-  INCLUDES += -I$(TNMSCORE)/include -I$(TOPDIR)/tcanetpp/include \
-              -I$(TOPDIR)/tcaxmlpp/include
-  LFLAGS   += -L$(TNMSCORE)/lib
-  LIBS     += -ltnmsCore
+    TNMSCORE  = $(TOPDIR)/tnmsCore
+    INCLUDES += -I$(TNMSCORE)/include -I$(TOPDIR)/tcanetpp/include -I$(TOPDIR)/tcaxmlpp/include
+    LFLAGS   += -L$(TNMSCORE)/lib
+    LIBS     += -ltnmsCore
 endif
 
 
 ifdef NEED_TNMSSESSION
-  TNMSSESSION = $(TOPDIR)/tnmsSession
-  INCLUDES   += -I$(TNMSSESSION)/include
-  LFLAGS     += -L$(TNMSSESSION)/lib
-  LIBS       += -ltnmsSession
+    TNMSSESSION = $(TOPDIR)/tnmsSession
+    INCLUDES   += -I$(TNMSSESSION)/include
+    LFLAGS     += -L$(TNMSSESSION)/lib
+    LIBS       += -ltnmsSession
 endif
 
 #-------------------------------------------------------------------------
@@ -154,130 +153,131 @@ endif
 
 ifdef NEED_RDKAFKA
 ifdef TCAMAKE_PROJECT
-  RDKAFKA_HOME = $(TOPDIR)/common/librdkafka
-  INCLUDES    += -I$(RDKAFKA_HOME)/src-cpp
-  LFLAGS      += -L$(RDKAFKA_HOME)/src-cpp -L$(RDKAFKA_HOME)/src
+    RDKAFKA_HOME = $(TOPDIR)/common/librdkafka
+    INCLUDES    += -I$(RDKAFKA_HOME)/src-cpp
+    LFLAGS      += -L$(RDKAFKA_HOME)/src-cpp -L$(RDKAFKA_HOME)/src
 else
-  RDKAFKA_HOME = /usr
-  INCLUDES    += -I$(RDKAFKA_HOME)/include/rdkafka
+    RDKAFKA_HOME = /usr
+    INCLUDES    += -I$(RDKAFKA_HOME)/include/rdkafka
 endif
-  LIBS        += -lrdkafka++ -lrdkafka -lsasl2 -lzstd
-  MACROS      += -DRDKAFKA
+    LIBS        += -lrdkafka++ -lrdkafka -lsasl2 -lzstd
+    MACROS      += -DRDKAFKA
 endif
 
 
 ifdef NEED_GSOAP
 ifdef TCAMAKE_PROJECT
-  GSOAP_DIR = $(TOPDIR)/common/gsoap-2.8/gsoap
-  #GSOAP_BIN = $(GSOAP_DIR)/bin/macosx
-  GSOAP_BIN = $(GSOAP_DIR)/bin/linux386
-  INCLUDES += -I${GSOAP_DIR}
+    GSOAP_DIR = $(TOPDIR)/common/gsoap-2.8/gsoap
+    #GSOAP_BIN = $(GSOAP_DIR)/bin/macosx
+    GSOAP_BIN = $(GSOAP_DIR)/bin/linux386
+    INCLUDES += -I${GSOAP_DIR}
 endif
 endif
 
 
 ifdef NEED_LIBPQXX
-  LIBS     += -lpqxx -lpq
-  CFLAGS   += -DUSE_POSTGRESQL
+    LIBS   += -lpqxx -lpq
+    CFLAGS += -DUSE_POSTGRESQL
 endif
 
 ifdef NEED_MYSQL
-  MYSQL_HOME = /usr
-  INCLUDES  += -I$(MYSQL_HOME)/include/mysql
-  LFLAGS    += -L$(MYSQL_HOME)/lib
-  CFLAGS    += -DUSE_MYSQL
-  LIBS      += -lmysqlclient
+    MYSQL_HOME = /usr
+    INCLUDES  += -I$(MYSQL_HOME)/include/mysql
+    LFLAGS    += -L$(MYSQL_HOME)/lib
+    CFLAGS    += -DUSE_MYSQL
+    LIBS      += -lmysqlclient
 endif
 
 ifdef NEED_NET_SNMP
-  NETSNMP_HOME = /usr
-  INCLUDES += -I$(NETSNMP_HOME)/include/net-snmp
-  LIBS     += -lnetsnmp -lcrypto
+    NETSNMP_HOME = /usr
+    INCLUDES += -I$(NETSNMP_HOME)/include/net-snmp
+    LIBS     += -lnetsnmp -lcrypto
 endif
 
 ifdef NEED_PTHREADS
-  LIB_PTHREAD ?= -lpthread
-  LFLAGS      += -L/usr/lib
-  LIBS        += $(LIB_PTHREAD)
-  CFLAGS      += $(PTHREAD_CFLAGS)
-  MACROS      += -D_THREAD_SAFE -D_REENTRANT -D_PTHREADS -D_GNU_SOURCE -DPTHREADS
+    LIB_PTHREAD ?= -lpthread
+    LFLAGS      += -L/usr/lib
+    LIBS        += $(LIB_PTHREAD)
+    CFLAGS      += $(PTHREAD_CFLAGS)
+    MACROS      += -D_THREAD_SAFE -D_REENTRANT -D_PTHREADS -D_GNU_SOURCE -DPTHREADS
 endif
 
 ifdef NEED_NCURSES
-  LIBS   += -lpanel -lncurses
+    LIBS   += -lpanel -lncurses
 endif
 
 ifdef NEED_LIBPANEL
-  LIBS   += -lpanel -lncurses
+    LIBS   += -lpanel -lncurses
 endif
 
 ifdef NEED_LIBDL
-  LIB_DL ?= -ldl
-  LIBS   += $(LIB_DL)
+    LIB_DL ?= -ldl
+    LIBS   += $(LIB_DL)
 endif
 
 ifdef NEED_LIBRT
-  LIB_RT ?= -lrt
-  LIBS   += $(LIB_RT)
-  CFLAGS += -DUSE_LIBRT
+    LIB_RT ?= -lrt
+    LIBS   += $(LIB_RT)
+    CFLAGS += -DUSE_LIBRT
 endif
 
 ifdef NEED_SOCKET
-  LIBS   += $(LIB_SOCKET) $(LIB_NSL)
+    LIBS += $(LIB_SOCKET) $(LIB_NSL)
 endif
 
 ifdef NEED_BOOST_REGEXP
-  BOOST_HOME  = /usr
-  LFLAGS     += -L$(BOOST_HOME)/lib/boost-1_35
-  INCLUDES   += -I$(BOST_HOME)/include/boost-1_35
+    BOOST_HOME  = /usr
+    LFLAGS     += -L$(BOOST_HOME)/lib/boost-1_35
+    INCLUDES   += -I$(BOST_HOME)/include/boost-1_35
 ifdef NEED_PTHREADS
-    LIBS   += -lboost_regex-mt
+    LIBS += -lboost_regex-mt
 else
-    LIBS   += -lboost_regex
+    LIBS += -lboost_regex
 endif
 endif
 
 ifdef NEED_LIBXML2_INCLUDE
-  INCLUDES += -I/usr/include/libxml2
+    INCLUDES += -I/usr/include/libxml2
 endif
 
 ifdef NEED_LIBXML2
-  INCLUDES   += -I/usr/include/libxml2
-  LIBS       += -lxml2
+    INCLUDES += -I/usr/include/libxml2
+    LIBS     += -lxml2
 endif
 
 ifdef NEED_LIBPCAP
-  LIBS  += -lpcap
+    LIBS  += -lpcap
 endif
 
 ifdef NEED_OPENSSL
-  CFLAGS   += -DWITH_OPENSSL
-  LIBS     += -lssl -lcrypto
-  #LIBS     += -Wl,-Bstatic -lssl -lcrypto -Wl,-Bdynamic
+    CFLAGS += -DWITH_OPENSSL
+    LIBS   += -lssl -lcrypto
+    #LIBS   += -Wl,-Bstatic -lssl -lcrypto -Wl,-Bdynamic
 endif
 
 ifdef NEED_OPENSSL_STATIC
-  CFLAGS   += -DWITH_OPENSSL
-  LIBS     += -Wl,-Bstatic -lssl -lcrypto -Wl,-Bdynamic
+    CFLAGS += -DWITH_OPENSSL
+    LIBS   += -Wl,-Bstatic -lssl -lcrypto -Wl,-Bdynamic
 endif
 
 ifdef NEED_ZLIB_INCLUDE
-  INCLUDES += -I$/usrinclude/zlib
+    INCLUDES += -I/usr/include/zlib
 endif
 
 ifdef NEED_ZLIB
-  ZLIB_HOME = $(TOPDIR)/common/zlib
-  INCLUDES += -I$(ZLIB_HOME) -I$(TOPDIR)/common/zipstream
-  LFLAGS   += -L$(ZLIB_HOME)
-  LIBS     += -lz
+    LIBS += -lz
 endif
 
+ifdef NEED_LZ4
+    LIBS += -llz4
+endif 
+
 ifdef NEED_ZIPSTREAM
-  INCLUDES += -I$(TOPDIR)/common/zipstream
+    INCLUDES += -I$(TOPDIR)/common/zipstream
 endif
 
 #-------------------------------------------------------------------------
 ## Do not edit below this line
 ifndef TCAMAKE_AUTODEPEND
-  include $(TOPDIR)/tcamake/tcamake_autodepend
+    include $(TOPDIR)/tcamake/tcamake_autodepend
 endif
