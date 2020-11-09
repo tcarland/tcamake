@@ -34,10 +34,10 @@ OBJS=		src/mysrc.o
 ALL_OBJS=	$(OBJS)
 ALL_BINS=	$(BIN)
 
+
+include $(TOPDIR)/tcamake/tcamake_include
+
 all: mybin
-
-include $(TOPDIR)/tcamake/project_defs
-
 
 mybin: $(OBJS)
 	$(make-cxxbin-rule)
@@ -45,7 +45,6 @@ mybin: $(OBJS)
 
 .PHONY: test
 test:
-
 
 clean:
 	$(RM) $(ALL_OBJS) \

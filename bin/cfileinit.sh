@@ -2,7 +2,7 @@
 #
 #       cfileinit.sh
 #
-#   A template for creating a source file with ifndef/define and 
+#   A template for creating a C/C++ source file with ifndef/define and 
 #   namespace declarations, if applicable.
 #
 PNAME=${0##*\/}

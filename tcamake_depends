@@ -10,7 +10,7 @@ endif
 
 # Global defines and compile options
 ifndef TCAMAKE_VERSION
-  include $(TOPDIR)/tcamake/tcamake_include
+  include $(TOPDIR)/tcamake/tcamake.Makefile
 endif
 
 #-------------------------------------------------------------------------
