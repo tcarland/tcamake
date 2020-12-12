@@ -2,9 +2,7 @@
 #
 #  For building external libraries stored locally in our repo.
 #
-TOPDIR = ..
 
-include ${TOPDIR}/tcamake/builddefs
 
 all: zlib net-snmp libxml2
 

@@ -2,7 +2,7 @@ tcamake
 =======
 
 ***Author***  tcarland@gmail.com  
-***Version***  20.11
+***Version***  20.12
 
 
 ### Overview:
@@ -30,20 +30,22 @@ dependencies of projects within the build system.
 
   The build environment layout is specific to a directory structure
 starting with a root directory that is referred to as the 'top' directory
-or $TOPDIR. This can be for a specific project or group of projects as needed.
+or $TOPDIR. This can be for a single project or group of projects as needed.
 The term project is used loosely to define an encompassing environment
-that may, in fact, contain many projects and is frequently referred to as
-a 'workspace' or 'repository'. This is often the root of version control repo.  
+that may, in fact, contain many sub-projects and is frequently referred 
+to as a 'workspace'.
 
-  An instance of the 'tcamake' build environment should exist at the
-workspace top-level. For example, assume we have the following code
-repository, '~/src/repo'. 'repo' is considered the workspace
-or TOPDIR. The build system would then be '$TOPDIR/tcamake' or in this
-case, '~/src/repo/tcamake'.  
+  An instance of the *tcamake* build environment should exist at the 
+workspace top-level. For example, assume we have the following workspace, 
+*~/src/repo* where `repo` is considered the workspace or TOPDIR. The build 
+system would then be `$TOPDIR/tcamake` or in this case, *~/src/repo/tcamake*.  
 
-  Each subsequent project Makefile within the repo would define the
-TOPDIR environment variable to point to the relative root of the workspace.
-Additionally, each Makefile must include **$TOPDIR/tcamake/project_defs**,
+  Individual code projects in the workspace such as a top-level project 
+(eg. *~/src/repo/project_a*) would define *TOPDIR* simply as `..`. Each 
+subsequent project Makefile would define this *TOPDIR* environment variable 
+as pointing to the relative root of the workspace.
+
+  Additionally, each Makefile must include *$TOPDIR/tcamake/tcamake_include*,
 though this should include should occur **after** setting any custom
 options as shown in the below example:
 ```
@@ -54,26 +56,31 @@ NEED_SOCKET = 1
 NEED_ZLIB = 1
 NEED_KAFKA = 1
 
+# Custom flags
 ifdef TCAMAKE_DEBUG
 OPT_FLAGS= 	-g
 endif
 
-# custom lib/includes
+CCSHARED +=  -Wl,-soname,$@
+CXXFLAGS =   -std=c++11
+
 INCLUDES=   -Iinclude
 LIBS=
 
+# objects
 BIN=		mybin
 OBJS=		src/mysrc.o
 
 ALL_OBJS=	$(OBJS)
 ALL_BINS=	$(BIN)
 
-all: mybin test
+# Include tcamake after all custom defines
+# ---------------
 
-# Include tcamake 'project_defs' after all custom defines
-include $(TOPDIR)/tcamake/project_defs
+include $(TOPDIR)/tcamake/tcamake_include
 
 # ---------------
+all: mybin test
 
 mybin: $(OBJS)
 	$(make-cxxbin-rule)
@@ -101,38 +108,27 @@ endif
   Templates for these Makefiles are provided in the templates sub-directory
 and can be modified as needed. A given project can then have a default
 Makefile template installed by using the project init script:
-**tcamake_init_project.sh**.  
+*tcamake_init_project.sh*.  
 
-  A given build environment could potentially have more than one top-level
-directory. Each top-level is essentially a *Makefile* that includes
-`${TOPDIR}/tcamake/build_defs`. This allows some global project settings 
-that other projects can use (eg. USE_MYSQL).
-
-  The environment variable **TCAMAKE_PROJECT** reflects that a tcamake build
-repository exists which can be used by sub-level Makefiles that wish to
-distinguish between build environments versus stand-alone distribution. The
-goal of this is to allow a standalone distribution to find common
-libraries that now only exist at the system-level instead of within a build
-environment.
+  The environment variable **TCAMAKE_PROJECT** can be used for defining 
+dependencies that should be resolved locally or relative to the workspace 
+*TOPDIR*. This allows us to override dependency versions that may also be 
+found in the system paths  (eg. openssl libraries). 
 
 
 ### Files:
 
 The Makefile hierarchy includes the following files:
 
- * **build_defs**  
-    This is included once by the top-level or 'root' build Makefile and
-    sets common environment vars to be used across projects or the build
-    environment.  
-
- * **project_defs**  
-    This is the Makefile 'include' entry-point included by project Makefiles.
-    It pulls in both the dependencies and the platform environment via the
-    'depends' and 'environment' files respectively.
 
  * **tcamake_include**  
-    This is the primary *include* file the tcamake framework. This gets 
-    included by *project_defs* which is the entrypoint as described above.
+    This is the Makefile *include* file to be included by a Makefile.
+    It pulls in both the dependencies and the platform environment via the
+    'depends' and 'environment' files respectively and is the entrypoint.
+
+ * **tcamake.Makefile**  
+    This is the primary *include* file of the tcamake framework. This gets 
+    included by *tcamake_include* which is the entrypoint as described above.
 
  * **tcamake_env**  
     This is included automatically for each project to initiate the
@@ -172,7 +168,3 @@ within a given project as needed.
  * **tcamake_init_project.sh**  
     Used to inititiate a new project within the workspace, providing
     a base Makefile template.
-
- * **tcamake_init_workspace.sh**  
-    Used to create a new workspace using the workspace template from
-    the tcamake project from which the script was called.

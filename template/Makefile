@@ -1,7 +1,7 @@
 # ------------------------
 #  Top-level Makefile
 #
-include ./tcamake/build_defs
+include ./build_env
 
 # ------------------------
 

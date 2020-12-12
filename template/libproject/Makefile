@@ -28,16 +28,13 @@ ALL_OBJS =	    $(OBJS) $(TEST_OBJS)
 ALL_BINS = 	    $(BIN)
 
 
+include ${TOPDIR}/tcamake/tcamake_include
+
+
 all: lib
 
-# REQUIRED
-include ${TOPDIR}/tcamake/project_defs
-
-
 lib: arlib solib
-
 arlib: lib/libmylib.a
-
 solib: lib/libmylib.so.0.0.1
 
 lib/libmylib.a: ${OBJS}

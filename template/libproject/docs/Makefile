@@ -9,7 +9,7 @@ objects:=$(patsubst %.md,%.pdf,$(sources))
 
 all: pdf documentation
 
-include $(TOPDIR)/tcamake/project_defs
+include $(TOPDIR)/tcamake/tcamake_include
 
 documentation:
 	( doxygen )

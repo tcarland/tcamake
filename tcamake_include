@@ -1,71 +1,48 @@
+# tcamake/tcamake_include
 #
-#  tcamake_include
+#   A complete 'Makefile' build environment for including platform
+# dependencies.
 #
-#  Global compile options and defines. Pulls in project
-#  dependencies via 'tcamake_depends'
+# This file should be included by a project or any sub-level Makefiles.
+#
+# $(TOPDIR) *must* be set by the source Makefile.
+#
+# Definitions provided by the Makefile should be defined *prior* to the 
+# include statement to include this file.
+#
+# Additional customization via the variables below should also be set
+# *prior* to including 'project_defs' (this file).
+#
+#   L_TARGET:    A library target
+#   L_OBJS:      Objects that make up L_TARGET
+#   T_TARGETS:   C programs that use L_TARGET
+#   TXX_TARGETS: C++ programs that use L_TARGET
+#   CFLAGS:      Compile-time flags to add to `gcc`
+#   CXXFLAGS:    Compile-time flags to add to `g++`
+#   OPT_FLAGS:   Optimization settings (-g, -g -O2, -O, ...)
+#   INCLUDES:    Include flags
+#   MACROS:      Definitions
+#   LFLAGS:      Link flags
+#   LIBS:        Link libraries
+#   ALL_OBJS:    All object files (*.o) outside of the L_OBJS files and
+#                the *_TARGETS.o files.  These are defined to know what
+#                dependency files should be read.
+#   ALL_BINS:    All binary targets outside of T_TARGETS and TXX_TARGETS
+#                that dependencies should be read for.
+#
+# Macros the Makefile should use when defining custom rules:
+#
+#   makebindep-cmd: Use after a link rule.  Expects $(LFLAGS) and $(LIBS)
+#                   to include all the libraries that go into the build.
+#                   The library dependencies will be written out to
+#                   <target>.bd.
+#   makedep-prefix:
+#   makedep-precmd: These two are used in combination when building a .o
+#                   file.  See the '%.o: %.c' definition for how to use.
+#                   The header file dependencies will be written out to
+#                   <target>.d.  The only trouble that occurs is if you
+#                   delete a header file entirely.  You'll need to remove
+#                   the affected .d files to rebuild.
 #
 
-export TCAMAKE_VERSION="v20.11"
-
-ifndef TCAMAKE_ENV
-    include $(TOPDIR)/tcamake/tcamake_env
-endif
-
-#-------------------------------------------------------------------------
-
-RM = rm -rf
-CP = cp --preserve
-MKDIR = mkdir -p
-RSYNC = rsync -av
-RDIST = rsync -avL --delete --exclude=.git --exclude=.svn --exclude=.cvs
-PANDOC = pandoc -s
-
-CXX = g++
-CC = gcc
-
-DEP_OBJS = *.d *.D *.bd src/*d src/*.D src/*.bd
-
-ifndef OPT_FLAGS
-  OPT_FLAGS = -O2
-endif
-
-ifndef CPPFLAGS
-  CPPFLAGS = -Wall ${INCLUDES} ${MACROS}
-endif
-
-ifndef CPPFLAGS_THR
-  CPPFLAGS_THR	= -DUSE_PTHREADS
-endif
-
-ifndef CFLAGS
-  CFLAGS = $(OPT_FLAGS)
-else
-  CFLAGS += $(OPT_FLAGS)
-endif
-
-ifdef L_OBJS
-  ALL_OBJS += $(L_OBJS)
-ifdef L_TARGET
-    LIBS += $(L_TARGET)
-endif
-endif
-
-ifdef T_TARGETS
-  ALL_OBJS += $(T_TARGETS:=.o)
-  ALL_BINS += $(T_TARGETS)
-endif
-
-ifdef TXX_TARGETS
-  ALL_OBJS += $(TXX_TARGETS:=.o)
-  ALL_BINS += $(TXX_TARGETS)
-endif
-
-ifndef PDFLAGS
-    PDFLAGS = -V geometry:margin=1in -f markdown-implicit_figures
-endif
-
-#-------------------------------------------------------------------------
-# Do not edit below this line
-ifndef TCAMAKE_DEPENDS
-  include $(TOPDIR)/tcamake/tcamake_depends
-endif
+include $(TOPDIR)/tcamake/tcamake.Makefile
