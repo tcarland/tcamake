@@ -29,6 +29,7 @@
 #                dependency files should be read.
 #   ALL_BINS:    All binary targets outside of T_TARGETS and TXX_TARGETS
 #                that dependencies should be read for.
+#   AFL_DEBUG:   Enable compiliation with the AFL fuzzer. 
 #
 # Macros the Makefile should use when defining custom rules:
 #
