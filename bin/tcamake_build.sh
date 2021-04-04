@@ -25,51 +25,52 @@ if [ -n "$TCAMAKE_BUILD_LINKS" ]; then
     LINKLIST="$TCAMAKE_BUILD_LINKS $LINKLIST"
 fi
 
-usage()
-{
-    echo ""
-    echo "Usage: $PNAME [-hn] [command] {args} "
-    echo ""
-    echo "   [command] :  a standard 'make' target or one of the "
-    echo "                following commands."
-    echo ""
-    echo "       -h|--help   : displays this help"
-    echo "       -n|--dryrun : enables dry-run test mode"
-    echo ""
-    echo "       'dist' [path/project] "
-    echo "                   : Creates a distribution copy in the"
-    echo "                     provided path. "
-    echo "       'link'      : Creates project build links only"
-    echo "       'unlink'    : Removes build links only"
-    echo "       'clean'     : Removes build links and runs 'make clean'"
-    echo "       'show'      : shows the determined project root and "
-    echo "                     what links would be created. (dry run) "
-    echo ""
-    echo " Creates a distribution directory that includes any required "
-    echo " project paths by creating links."
-    echo " Any unrecognized commands are passed through to 'make'."
-    echo " Additional project links can be defined by setting the "
-    echo " variable TCAMAKE_BUILD_LINKS to the list of relative paths"
-    echo " from TOPDIR.";
-    echo ""
-}
+# ----------------------
 
+usage="
+Creates a distribution directory that includes links to
+any additional project paths needed.
+
+Unrecognized commands are passed through to 'make'.
+
+Additional project links can be defined by setting the 
+variable TCAMAKE_BUILD_LINKS to the list of relative paths
+from TOPDIR.
+
+Synopsis:
+  $PNAME [-hn] [command] {args} 
+
+Options:
+  [command]   :  a standard 'make' target or a build command
+
+  -h|--help   : displays this help
+  -n|--dryrun : enables dry-run test mode
+
+  'dist' [project] : Creates a distribution copy in the provided path. 
+  'link'           : Creates project build links only
+  'unlink'         : Removes build links only
+  'clean'          : Removes build links and runs 'make clean'
+  'show'           : shows the determined project root and 
+                     what links would be created. (dry run) 
+"
+
+# ----------------------
 
 findTopDirectory()
 {
     local srcdir="$PWD"
     local result=""
 
-    retval=0
+    rt=1
 
-    while [ $retval -eq 0 ]
+    while [ $rt -eq 1 ]
     do
         result=$(find . -name "$DEPFILE")
         if [ -n "$result" ]; then
-            retval=1
+            rt=0
         fi
 
-        if [ $retval -eq 0 ]; then
+        if [ $rt -eq 1 ]; then
             if [ $TOPDIR == "." ]; then
                 TOPDIR=""
             else
@@ -84,12 +85,12 @@ findTopDirectory()
     cd $srcdir
 
     if [ -z "$TOPDIR" ]; then
-        return 0
+        return 1
     fi
 
     echo "  <tcamake> project root set to '$TOPDIR'"
 
-    return 1
+    return 0
 }
 
 
@@ -101,7 +102,7 @@ clearLinks()
         fi
     done
 
-    return 1
+    return 0
 }
 
 
@@ -114,13 +115,14 @@ makeLinks()
         ( ln -s "$TOPDIR/$lf" )
     done
 
-    return 1
+    return 0
 }
 
 
 doBuild()
 {
     local target=$1
+    local rt=0
 
     echo ""
     if [ -n "$target" ]; then
@@ -128,10 +130,10 @@ doBuild()
     else
         ( make all )
     fi
+    rt=$?
     echo ""
-    retval=$?
 
-    return $retval
+    return $rt
 }
 
 
@@ -143,7 +145,7 @@ doDist()
 
     if [ -z "$target" ]; then
         echo " 'dist' requires a target path"
-        return 0
+        return 1
     fi
 
     if [ -n "$dry" ]; then
@@ -163,7 +165,7 @@ doDist()
             "Y" | "y" | "yes" | "YES")
                 ;;
             *)
-                return 0
+                return 1
                 ;;
         esac
     fi
@@ -176,13 +178,14 @@ doDist()
 }
 
 
-
+# -----------------------
 action=
+rt=0
 
 while [ $# -gt 0 ]; do
     case "$1" in
         'help'|-h|--help)
-            usage
+            echo "$usage"
             exit 0
             ;;
         -n|--dryrun)
@@ -228,13 +231,12 @@ echo ""
 echo "  $PNAME running in '$PWD'"
 
 findTopDirectory
-retval=$?
+rt=$?
 
-if [ $retval -eq 0 ]; then
+if [ $rt -ne 0 ]; then
     echo "$PNAME Failed to find the 'tcamake' workspace root directory"
     exit 1
 fi
-
 
 clearLinks
 makeLinks

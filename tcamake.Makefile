@@ -5,7 +5,7 @@
 #  Global compile options and dependency definitions. Including this file
 #  pulls in dependencies via 'tcamake_env' and namely 'tcamake_depends'.
 #
-export TCAMAKE_VERSION="v20.12"
+export TCAMAKE_VERSION="v21.04"
 
 ifndef TCAMAKE_ENV
     include $(TOPDIR)/tcamake/tcamake_env
@@ -21,7 +21,12 @@ RDIST = rsync -avL --delete --exclude=.git --exclude=.svn --exclude=.cvs
 PANDOC = pandoc -s
 
 CXX = g++
-CC = gcc
+CC  = gcc
+
+ifdef AFL_DEBUG
+  CXX = afl-g++
+  CC  = afl-gcc
+endif
 
 DEP_OBJS = *.d *.D *.bd src/*d src/*.D src/*.bd
 

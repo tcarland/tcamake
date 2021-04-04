@@ -14,27 +14,12 @@ EXT=
 DEFNAME=
 CLASS=1
 
-
-
-version()
-{
-    echo "$PNAME, $AUTHOR"
-    echo ""
-}
-
-usage()
-{
-    echo ""
-    echo "Usage: $PNAME [-hCV] -n <namespace>  sourcefile"
-    echo ""
-    echo "    --help      | -h        : Show usage info and exit"
-    echo "    --noclass   | -C        : Do not autogenerate cpp class header"
-    echo "    --namespace | -n <name> : Creates namespace declaration"
-    echo "    --version   | -V        : Show version info and exit"
-    echo ""
-    version
-    return 0
-}
+usage="
+ Usage: $PNAME [-hCV] [-n namespace]  <sourcefile>
+    --help      | -h        : Show usage info and exit
+    --noclass   | -C        : Do not autogenerate cpp class header
+    --namespace | -n <name> : Creates namespace declaration
+"
 
 setSourceName()
 {
@@ -191,17 +176,14 @@ while [ $# -gt 0 ]; do
         -C|--noclass)
             CLASS=
             ;;
-        -h|--help)
-            usage
+        'help'|-h|--help)
+            echo "$usage"
             exit 0
             ;;
         -n|--namespace)
             shift
             namespace=$1
             ;;
-        -V|--version)
-            version
-            exit 0
             ;;
         *)
             FILENAMES="$FILENAMES $1"
@@ -212,7 +194,7 @@ done
 
 
 if [ -z "$FILENAMES" ]; then
-    usage
+    echo "$usage"
     exit 0
 fi
 
