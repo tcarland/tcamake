@@ -167,7 +167,7 @@ endif
 
 ifdef NEED_GSOAP
 ifdef TCAMAKE_PROJECT
-    GSOAP_DIR = $(TOPDIR)/common/gsoap-2.8/gsoap
+    GSOAP_DIR = $(TOPDIR)/Common/gsoap-2.8/gsoap
     #GSOAP_BIN = $(GSOAP_DIR)/bin/macosx
     GSOAP_BIN = $(GSOAP_DIR)/bin/linux386
     INCLUDES += -I${GSOAP_DIR}
@@ -273,7 +273,7 @@ ifdef NEED_LZ4
 endif 
 
 ifdef NEED_ZIPSTREAM
-    INCLUDES += -I$(TOPDIR)/common/zipstream
+    INCLUDES += -I$(TOPDIR)/Common/zipstream
 endif
 
 #-------------------------------------------------------------------------
