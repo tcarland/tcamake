@@ -2,7 +2,7 @@ tcamake
 =======
 
 ***Author***  tcarland@gmail.com  
-***Version***  21.04
+***Version***  22.04
 
 
 ### Overview:
@@ -54,7 +54,7 @@ TOPDIR = ..
 # requirements
 NEED_SOCKET = 1
 NEED_ZLIB = 1
-NEED_KAFKA = 1
+NEED_RDKAFKA = 1
 
 # Custom flags
 ifdef TCAMAKE_DEBUG
