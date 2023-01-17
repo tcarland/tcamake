@@ -252,12 +252,19 @@ endif
 ifdef NEED_OPENSSL
     CFLAGS += -DWITH_OPENSSL
     LIBS   += -lssl -lcrypto
-    #LIBS   += -Wl,-Bstatic -lssl -lcrypto -Wl,-Bdynamic
 endif
 
 ifdef NEED_OPENSSL_STATIC
     CFLAGS += -DWITH_OPENSSL
     LIBS   += -Wl,-Bstatic -lssl -lcrypto -Wl,-Bdynamic
+endif
+
+ifdef NEED_LIBCURL_INCLUDE
+	INCLUDES += $(shell pkg-config --cflags libcurl)
+endif
+
+ifdef NEED_LIBCURL
+	LIBS   += -lcurl
 endif
 
 ifdef NEED_ZLIB_INCLUDE
