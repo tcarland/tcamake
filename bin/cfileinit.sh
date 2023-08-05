@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#       cfileinit.sh
+#     cfileinit.sh
 #
 #   A template for creating a C/C++ source file with ifndef/define and 
 #   namespace declarations, if applicable.

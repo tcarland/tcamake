@@ -3,10 +3,10 @@
 #   Timothy C. Arland <tcarland@gmail.com>
 #
 
-TCA_PORT_OS         := $(shell uname)
-TCA_PORT_MACHINE    := $(shell uname -m)
-TCA_PORT_IDENTIFIER := "$(TCA_PORT_OS)_$(TCA_PORT_MACHINE)"
-TCAMAKE_KV          := $(shell uname -r)
+TCAMAKE_PORT_OS         := $(shell uname)
+TCAMAKE_PORT_MACHINE    := $(shell uname -m)
+TCAMAKE_PORT_IDENTIFIER := "$(TCAMAKE_PORT_OS)_$(TCAMAKE_PORT_MACHINE)"
+TCAMAKE_KV              := $(shell uname -r)
 
 LIB_SOCKET=
 LIB_NSL=
@@ -15,7 +15,7 @@ LIB_DL=
 PTHREAD_CFLAGS=
 
 # set defaults for solaris sparc
-ifeq ($(TCA_PORT_IDENTIFIER), "SunOS_sun4u")
+ifeq ($(TCAMAKE_PORT_IDENTIFIER), "SunOS_sun4u")
   CFLAGS_ADD     = -DTCA_PORT_SOLARIS_SPARC
   EMANATE_OS     = -DSOLARIS
   EMANATE_os     = solaris_sun4
@@ -27,7 +27,7 @@ ifeq ($(TCA_PORT_IDENTIFIER), "SunOS_sun4u")
 endif
 
 # set defaults for linux intel x86
-ifeq ($(TCA_PORT_IDENTIFIER), "Linux_i686")
+ifeq ($(TCAMAKE_PORT_IDENTIFIER), "Linux_i686")
   CFLAGS_ADD     = -DTCA_PORT_LINUX_INTEL32
   EMANATE_OS     = -DLINUX
   EMANATE_os     = linux
@@ -37,7 +37,7 @@ ifeq ($(TCA_PORT_IDENTIFIER), "Linux_i686")
 endif
 
 # set defaults for linux amd64/intelx86_64
-ifeq ($(TCA_PORT_IDENTIFIER), "Linux_x86_64")
+ifeq ($(TCAMAKE_PORT_IDENTIFIER), "Linux_x86_64")
   CFLAGS_ADD     = -DTCA_PORT_LINUX_INTEL64
   EMANATE_OS     = -DLINUX
   EMANATE_os     = linux
@@ -48,7 +48,7 @@ ifeq ($(TCA_PORT_IDENTIFIER), "Linux_x86_64")
 endif
 
 # set defaults for linux intel itanium
-ifeq ($(TCA_PORT_IDENTIFIER), "Linux_ia64")
+ifeq ($(TCAMAKE_PORT_IDENTIFIER), "Linux_ia64")
   CFLAGS_ADD     = -DTCA_PORT_LINUX_IA64
   EMANATE_OS     = -DLINUX
   EMANATE_os     = linux
@@ -58,7 +58,7 @@ ifeq ($(TCA_PORT_IDENTIFIER), "Linux_ia64")
 endif
 
 # set defaults for mac os x32
-ifeq ($(TCA_PORT_IDENTIFIER), "Darwin_i386")
+ifeq ($(TCAMAKE_PORT_IDENTIFIER), "Darwin_i386")
   CFLAGS_ADD     = -DTCA_PORT_DARWIN_I386
   EMANATE_OS     = -DDARWIN
   EMANATE_os     = darwin
@@ -68,7 +68,7 @@ ifeq ($(TCA_PORT_IDENTIFIER), "Darwin_i386")
 endif
 
 # set defaults for mac os x x64
-ifeq ($(TCA_PORT_IDENTIFIER), "Darwin_x86_64")
+ifeq ($(TCAMAKE_PORT_IDENTIFIER), "Darwin_x86_64")
   CFLAGS_ADD     = -DTCA_PORT_DARWIN_INTEL64
   EMANATE_OS     = -DDARWIN
   EMANATE_os     = darwin
@@ -78,17 +78,17 @@ ifeq ($(TCA_PORT_IDENTIFIER), "Darwin_x86_64")
 endif
 
 # set defaults for freebsd
-ifeq ($(TCA_PORT_IDENTIFIER), "FreeBSD_i386")
+ifeq ($(TCAMAKE_PORT_IDENTIFIER), "FreeBSD_i386")
   CFLAGS_ADD     = -DTCA_PORT_FREEBSD_INTEL
   PTHREAD_CFLAGS = -pthread
 endif
 
 ifndef CFLAGS_ADD
   # error out for unknown os/platform
-  $(error "cannot support unknown os/machine: $(TCA_PORT_IDENTIFIER)")
+  $(error "cannot support unknown os/machine: $(TCAMAKE_PORT_IDENTIFIER)")
 endif
 
 CFLAGS          += $(CFLAGS_ADD)
 CXXFLAGS        += $(CXXFLAGS_ADD)
 
-TCAMAKE_ENV     := $(TCA_PORT_IDENTIFIER)
+TCAMAKE_ENV     := $(TCAMAKE_PORT_IDENTIFIER)

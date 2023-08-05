@@ -3,19 +3,6 @@
 #   Template Makefile for projects
 #
 
-# TOPDIR is the relative path to our workspace root
-# where /tcamake should exist.
-#
-# The following ifdef is used for extracting the project 
-# into a standalone project. See 'build.sh' for extracting
-# solo distributions.  In most cases this is not necessary, 
-# simply set TOPDIR to the relative root and compile.
-ifdef TCAMAKE_PROJECT
-    TOPDIR = ..
-else
-    TOPDIR = .
-endif
-
 # set requirements
 NEED_SOCKET = 1
 NEED_ZLIB = 1
@@ -35,7 +22,7 @@ ALL_OBJS=	$(OBJS)
 ALL_BINS=	$(BIN)
 
 
-include $(TOPDIR)/tcamake/tcamake_include
+include $(TCAMAKE_HOME)/tcamake_include
 
 all: mybin
 

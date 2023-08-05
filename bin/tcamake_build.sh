@@ -10,15 +10,19 @@ PARENT=".."
 LINKLIST="tcamake"
 DEPFILE="tcamake_depends"
 RSYNC="rsync"
-OPTIONS="-avL --delete --exclude=.cvs --exclude=.svn --exclude=.hg --exclude=.git "
+OPTIONS="-avCL --delete "
 DRYRUN="--dry-run"
 DODIST=0
 
 dry=
 retval=0
 
-if [ -z "$TOPDIR" ]; then
-    TOPDIR="."
+if [ -z "$TCAMAKE_HOME" ]; then
+    if [ -n "$TCAMAKE_PROJECT" ]; then
+        TCAMAKE_HOME="$TCAMAKE_PROJECT/tcamake"
+    else
+        TCAMAKE_HOME="../tcamake"
+    fi
 fi
 
 if [ -n "$TCAMAKE_BUILD_LINKS" ]; then
@@ -56,44 +60,6 @@ Options:
 
 # ----------------------
 
-findTopDirectory()
-{
-    local srcdir="$PWD"
-    local result=""
-
-    rt=1
-
-    while [ $rt -eq 1 ]
-    do
-        result=$(find . -name "$DEPFILE")
-        if [ -n "$result" ]; then
-            rt=0
-        fi
-
-        if [ $rt -eq 1 ]; then
-            if [ $TOPDIR == "." ]; then
-                TOPDIR=""
-            else
-                TOPDIR="${TOPDIR}/"
-            fi
-
-            cd $PARENT
-            TOPDIR="${TOPDIR}${PARENT}"
-        fi
-    done
-
-    cd $srcdir
-
-    if [ -z "$TOPDIR" ]; then
-        return 1
-    fi
-
-    echo "  <tcamake> project root set to '$TOPDIR'"
-
-    return 0
-}
-
-
 clearLinks()
 {
     for lf in $LINKLIST; do
@@ -111,8 +77,8 @@ makeLinks()
     echo "  <tcamake> generating links: $LINKLIST "
 
     for lf in $LINKLIST; do
-        echo "  ln -s $TOPDIR/$lf ."
-        ( ln -s "$TOPDIR/$lf" )
+        echo "  ln -s $TCAMAKE_PROJECT/$lf ."
+        ( ln -s "$TCAMAKE_PROJECT/$lf" )
     done
 
     return 0

@@ -1,4 +1,4 @@
-TOPDIR = ../..
+#
 
 ifeq (, $(shell which pandoc))
  $(error "Error, 'pandoc' not found in PATH.")
@@ -9,7 +9,7 @@ objects:=$(patsubst %.md,%.pdf,$(sources))
 
 all: pdf documentation
 
-include $(TOPDIR)/tcamake/tcamake_include
+include $(TCAMAKE_HOME)/tcamake_include
 
 documentation:
 	( doxygen )
