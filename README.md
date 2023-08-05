@@ -2,7 +2,7 @@ tcamake
 =======
 
 ***Author***  tcarland@gmail.com  
-***Version***  23.01
+***Version***  23.08
 
 
 ## Overview:
@@ -143,7 +143,7 @@ The Makefile hierarchy includes the following files:
   dependencies before projects with the least dependencies.  
 
 - **tcamake_autodepend**  
-  An internal file for defining build commands and is the last file included
+  An internal file for defining build 14sommands and is the last file included
   by 'depends'. This file should NOT need to be modified.
 
 

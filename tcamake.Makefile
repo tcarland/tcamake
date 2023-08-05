@@ -5,7 +5,7 @@
 #  Global compile options and dependency definitions. Including this file
 #  pulls in dependencies via 'tcamake_env' and namely 'tcamake_depends'.
 #
-export TCAMAKE_VERSION="v23.01"
+export TCAMAKE_VERSION="v23.08"
 
 ifndef TCAMAKE_ENV
     include $(TOPDIR)/tcamake/tcamake_env
