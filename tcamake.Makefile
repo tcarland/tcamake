@@ -8,7 +8,7 @@
 export TCAMAKE_VERSION="v23.08"
 
 ifndef TCAMAKE_ENV
-    include $(TOPDIR)/tcamake/tcamake_env
+    include $(TCAMAKE_HOME)/tcamake_env
 endif
 
 #-------------------------------------------------------------------------
@@ -72,5 +72,5 @@ endif
 #-------------------------------------------------------------------------
 # Do not edit below this line
 ifndef TCAMAKE_DEPENDS
-  include $(TOPDIR)/tcamake/tcamake_depends
+  include $(TCAMAKE_HOME)/tcamake_depends
 endif

@@ -1,6 +1,4 @@
 #  tcamake template for a library
-#
-TOPDIR = ..
 
 # build requirements
 NEED_PTHREADS = 1
@@ -28,7 +26,7 @@ ALL_OBJS =	    $(OBJS) $(TEST_OBJS)
 ALL_BINS = 	    $(BIN)
 
 
-include ${TOPDIR}/tcamake/tcamake_include
+include ${TCAMAKE_HOME}/tcamake_include
 
 
 all: lib

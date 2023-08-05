@@ -26,31 +26,26 @@ for very large projects and multiple platforms.
 **tcamake** provides an *include* hierarchy that defines all of the
 dependencies of projects within the build system.
 
-## Layout (TOPDIR):
+## Layout (TCAMAKE_PROJECT):
 
-The build environment layout is specific to a directory structure
-starting with a root directory that is referred to as the 'top' directory
-or $TOPDIR. This can be for a single project or group of projects as needed.
-The term project is used loosely to define an encompassing environment
-that may, in fact, contain many sub-projects and is frequently referred 
-to as a 'workspace'.
+The build environment layout is specific to a directory structure starting 
+with a root directory that is referred to as the *Project* directory or
+`TCAMAKE_PROJECT`. This can be for a single project or group of projects as 
+needed.  The term *Project* is used to define an encompassing environment
+that may contain many sub-projects and can be also thought of as a *workspace*.
 
-An instance of the *tcamake* build environment should exist at the 
-workspace top-level. For example, assume we have the following workspace, 
-*~/src/repo* where `repo` is considered the workspace or TOPDIR. The build 
-system would then be `$TOPDIR/tcamake` or in this case, *~/src/repo/tcamake*.  
+An instance of the *tcamake* build environment should exist at the project 
+workspace level or otherwise have TCAMAKE_HOME set accordingly.
 
-Individual code projects in the workspace such as a top-level project 
-(eg. *~/src/repo/project_a*) would define *TOPDIR* simply as `..`. Each 
-subsequent project Makefile would define this *TOPDIR* environment variable 
-as pointing to the relative root of the workspace.
+A given workspace project may consist of many sub-projects or repositories 
+that consist of dependencies. Each of these projects can refer to the build 
+system via *TCAMAKE_HOME* and any given project Makefile should always include 
+*${TCAMAKE_HOME}/tcamake_include*. The include should occur **after** setting
+various custom options or build overrides such as OPT_FLAGS, CFLAGS or CXXFLAGS,
+INCLUDES, LIBS, etc.
 
-Additionally, each Makefile must include *$TOPDIR/tcamake/tcamake_include*,
-though this should include should occur **after** setting any custom
-options as shown in the below example:
+The following example demonstrates a typical Makefile layout.
 ```makefile
-TOPDIR = ..
-
 # requirements
 NEED_SOCKET = 1
 NEED_ZLIB = 1
@@ -77,7 +72,7 @@ ALL_BINS=	$(BIN)
 # Include tcamake after all custom defines
 # ---------------
 
-include $(TOPDIR)/tcamake/tcamake_include
+include $(TCAMAKE_HOME)/tcamake_include
 
 # ---------------
 all: mybin test
@@ -109,11 +104,6 @@ Templates for these Makefiles are provided in the templates sub-directory
 and can be modified as needed. A given project can then have a default
 Makefile template installed by using the project init script:
 *tcamake_init_project.sh*.  
-
-The environment variable **TCAMAKE_PROJECT** can be used for defining 
-dependencies that should be resolved locally or relative to the workspace 
-*TOPDIR*. This allows us to override dependency versions that may also be 
-found in the system paths  (eg. openssl libraries). 
 
 
 ## Files:
@@ -162,7 +152,6 @@ within a given project as needed.
   independently of the workspace. This script will assist in creating a
   project distribution by ensuring that links for needed dependencies
   such as 'tcamake' itself or other common libs are generated.
-  Alternatively, it simply allows for building a project while overriding TOPDIR.
 
 - **tcamake_init_project.sh**  
   Used to inititiate a new project within the workspace, providing

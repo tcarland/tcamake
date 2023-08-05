@@ -10,7 +10,7 @@ endif
 
 # Global defines and compile options
 ifndef TCAMAKE_VERSION
-  include $(TOPDIR)/tcamake/tcamake.Makefile
+  include $(TCAMAKE_HOME)/tcamake/tcamake.Makefile
 endif
 
 #-------------------------------------------------------------------------
@@ -22,7 +22,7 @@ endif
 
 ifdef NEED_TCAXMLPP
 ifdef TCAMAKE_PROJECT
-    TCAXML_HOME = $(TOPDIR)/tcaxmlpp
+    TCAXML_HOME = $(TCAMAKE_PROJECT)/tcaxmlpp
     INCLUDES   += -I$(TCAXML_HOME)/include
 else
     TCAXML_HOME = /usr/local
@@ -35,7 +35,7 @@ endif
 
 ifdef NEED_TCANETPP_INCLUDE
 ifdef TCAMAKE_PROJECT
-    INCLUDES += -I$(TOPDIR)/tcanetpp/include
+    INCLUDES += -I$(TCAMAKE_PROJECT)/tcanetpp/include
 else
     INCLUDES += -I/usr/local/include/tcanetpp
 endif
@@ -44,7 +44,7 @@ endif
 
 ifdef NEED_TCANETPP
 ifdef TCAMAKE_PROJECT
-    TCANETPP_HOME = $(TOPDIR)/tcanetpp
+    TCANETPP_HOME = $(TCAMAKE_PROJECT)/tcanetpp
     INCLUDES     += -I$(TCANETPP_HOME)/include
 else
     TCANETPP_HOME = /usr/local
@@ -57,7 +57,7 @@ endif
 
 ifdef NEED_TCACMDBUF
 ifdef TCAMAKE_PROJECT
-    TCANETPP_HOME = $(TOPDIR)/tcanetpp
+    TCANETPP_HOME = $(TCAMAKE_PROJECT)/tcanetpp
     INCLUDES     += -I$(TCANETPP_HOME)/include
 else
     TCANETPP_HOME = /usr/local
@@ -70,7 +70,7 @@ endif
 
 ifdef NEED_TCASQLPP
 ifdef TCAMAKE_PROJECT
-    TCASQL_HOME = $(TOPDIR)/tcasqlpp
+    TCASQL_HOME = $(TCAMAKE_PROJECT)/tcasqlpp
     INCLUDES   += -I$(TCASQL_HOME)/include
 else
     TCASQL_HOME = /usr/local
@@ -83,7 +83,7 @@ endif
 
 ifdef NEED_TCASNMP
 ifdef TCAMAKE_PROJECT
-    TCASNMP_HOME = $(TOPDIR)/tcasnmp
+    TCASNMP_HOME = $(TCAMAKE_PROJECT)/tcasnmp
     INCLUDES    += -I$(TCASNMP_HOME)/include
 else
     TCASNMP_HOME = /usr/local
@@ -96,7 +96,7 @@ endif
 
 ifdef NEED_HEXES
 ifdef TCAMAKE_PROJECT
-    HEXESHOME = $(TOPDIR)/libhexes
+    HEXESHOME = $(TCAMAKE_PROJECT)/libhexes
     INCLUDES += -I$(HEXESHOME)/include
 else
     HEXESHOME = /usr/local
@@ -109,7 +109,7 @@ endif
 
 ifdef NEED_TCAJSON
 ifdef TCAMAKE_PROJECT
-    TCAJSON_HOME = $(TOPDIR)/tcajson
+    TCAJSON_HOME = $(TCAMAKE_PROJECT)/tcajson
     INCLUDES   += -I$(TCAJSON_HOME)/include
 else
     TCAJSON_HOME = /usr/local
@@ -124,23 +124,23 @@ endif
 #-------------------------------------------------------------------------
 
 ifdef NEED_TNMSAPI
-    TNMSAPI    = $(TOPDIR)/TnmsApi
-    INCLUDES  += -I$(TNMSAPI) -I$(TOPDIR)/tnmsCore/include -I$(TOPDIR)/tcanetpp/include -I$(TOPDIR)/tcaxmlpp/include
+    TNMSAPI    = $(TCAMAKE_PROJECT)/TnmsApi
+    INCLUDES  += -I$(TNMSAPI) -I$(TCAMAKE_PROJECT)/tnmsCore/include -I$(TCAMAKE_PROJECT)/tcanetpp/include -I$(TCAMAKE_PROJECT)/tcaxmlpp/include
     LFLAGS    += -L$(TNMSAPI)/lib
     LIBS      += -lTnmsApi
 endif
 
 
 ifdef NEED_TNMSCORE
-    TNMSCORE  = $(TOPDIR)/tnmsCore
-    INCLUDES += -I$(TNMSCORE)/include -I$(TOPDIR)/tcanetpp/include -I$(TOPDIR)/tcaxmlpp/include
+    TNMSCORE  = $(TCAMAKE_PROJECT)/tnmsCore
+    INCLUDES += -I$(TNMSCORE)/include -I$(TCAMAKE_PROJECT)/tcanetpp/include -I$(TCAMAKE_PROJECT)/tcaxmlpp/include
     LFLAGS   += -L$(TNMSCORE)/lib
     LIBS     += -ltnmsCore
 endif
 
 
 ifdef NEED_TNMSSESSION
-    TNMSSESSION = $(TOPDIR)/tnmsSession
+    TNMSSESSION = $(TCAMAKE_PROJECT)/tnmsSession
     INCLUDES   += -I$(TNMSSESSION)/include
     LFLAGS     += -L$(TNMSSESSION)/lib
     LIBS       += -ltnmsSession
@@ -153,7 +153,7 @@ endif
 
 ifdef NEED_RDKAFKA
 ifdef TCAMAKE_PROJECT
-    RDKAFKA_HOME = $(TOPDIR)/Common/librdkafka
+    RDKAFKA_HOME = $(TCAMAKE_PROJECT)/Common/librdkafka
     INCLUDES    += -I$(RDKAFKA_HOME)/src-cpp
     LFLAGS      += -L$(RDKAFKA_HOME)/src-cpp -L$(RDKAFKA_HOME)/src
 else
@@ -167,7 +167,7 @@ endif
 
 ifdef NEED_GSOAP
 ifdef TCAMAKE_PROJECT
-    GSOAP_DIR = $(TOPDIR)/Common/gsoap-2.8/gsoap
+    GSOAP_DIR = $(TCAMAKE_PROJECT)/Common/gsoap-2.8/gsoap
     #GSOAP_BIN = $(GSOAP_DIR)/bin/macosx
     GSOAP_BIN = $(GSOAP_DIR)/bin/linux386
     INCLUDES += -I${GSOAP_DIR}
@@ -280,11 +280,11 @@ ifdef NEED_LZ4
 endif 
 
 ifdef NEED_ZIPSTREAM
-    INCLUDES += -I$(TOPDIR)/Common/zipstream
+    INCLUDES += -I$(TCAMAKE_PROJECT)/Common/zipstream
 endif
 
 #-------------------------------------------------------------------------
 ## Do not edit below this line
 ifndef TCAMAKE_AUTODEPEND
-    include $(TOPDIR)/tcamake/tcamake_autodepend
+    include $(TCAMAKE_HOME)/tcamake_autodepend
 endif

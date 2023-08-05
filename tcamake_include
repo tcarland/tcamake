@@ -5,7 +5,7 @@
 #
 # This file should be included by a project or any sub-level Makefiles.
 #
-# $(TOPDIR) *must* be set by the source Makefile.
+# $(TCAMAKE_HOME) should be set by the source Makefile.
 #
 # Definitions provided by the Makefile should be defined *prior* to the 
 # include statement to include this file.
@@ -46,4 +46,4 @@
 #                   the affected .d files to rebuild.
 #
 
-include $(TOPDIR)/tcamake/tcamake.Makefile
+include $(TCAMAKE_HOME)/tcamake.Makefile
