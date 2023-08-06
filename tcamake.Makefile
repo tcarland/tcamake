@@ -5,7 +5,7 @@
 #  Global compile options and dependency definitions. Including this file
 #  pulls in dependencies via 'tcamake_env' and namely 'tcamake_depends'.
 #
-export TCAMAKE_VERSION="v23.08"
+export TCAMAKE_VERSION="v23.08.05"
 
 ifndef TCAMAKE_ENV
     include $(TCAMAKE_HOME)/tcamake_env
@@ -14,7 +14,7 @@ endif
 #-------------------------------------------------------------------------
 
 RM = rm -rf
-CP = cp --preserve
+CP = cp --preserve=all --recursive
 MKDIR = mkdir -p
 RSYNC = rsync -av
 RDIST = rsync -avL --delete --exclude=.git --exclude=.svn --exclude=.cvs

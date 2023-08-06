@@ -25,7 +25,7 @@ ifdef TCAMAKE_PROJECT
     TCAXML_HOME = $(TCAMAKE_PROJECT)/tcaxmlpp
     INCLUDES   += -I$(TCAXML_HOME)/include
 else
-    TCAXML_HOME = /usr/local
+    TCAXML_HOME = /usr
     INCLUDES   += -I$(TCAXML_HOME)/include/tcaxmlpp
 endif
   LFLAGS += -L$(TCAXML_HOME)/lib
@@ -37,7 +37,7 @@ ifdef NEED_TCANETPP_INCLUDE
 ifdef TCAMAKE_PROJECT
     INCLUDES += -I$(TCAMAKE_PROJECT)/tcanetpp/include
 else
-    INCLUDES += -I/usr/local/include/tcanetpp
+    INCLUDES += -I/usr/include/tcanetpp
 endif
 endif
 
@@ -47,7 +47,7 @@ ifdef TCAMAKE_PROJECT
     TCANETPP_HOME = $(TCAMAKE_PROJECT)/tcanetpp
     INCLUDES     += -I$(TCANETPP_HOME)/include
 else
-    TCANETPP_HOME = /usr/local
+    TCANETPP_HOME = /usr
     INCLUDES     += -I$(TCANETPP_HOME)/include/tcanetpp
 endif
     LFLAGS += -L$(TCANETPP_HOME)/lib
@@ -60,7 +60,7 @@ ifdef TCAMAKE_PROJECT
     TCANETPP_HOME = $(TCAMAKE_PROJECT)/tcanetpp
     INCLUDES     += -I$(TCANETPP_HOME)/include
 else
-    TCANETPP_HOME = /usr/local
+    TCANETPP_HOME = /usr
     INCLUDES     += -I$(TCANETPP_HOME)/include/tcanetpp
 endif
     LFLAGS += -L$(TCANETPP_HOME)/lib
@@ -73,7 +73,7 @@ ifdef TCAMAKE_PROJECT
     TCASQL_HOME = $(TCAMAKE_PROJECT)/tcasqlpp
     INCLUDES   += -I$(TCASQL_HOME)/include
 else
-    TCASQL_HOME = /usr/local
+    TCASQL_HOME = /usr
     INCLUDES   += -I$(TCASQL_HOME)/include/tcasqlpp
 endif
    LFLAGS += -L$(TCASQL_HOME)/lib
@@ -86,7 +86,7 @@ ifdef TCAMAKE_PROJECT
     TCASNMP_HOME = $(TCAMAKE_PROJECT)/tcasnmp
     INCLUDES    += -I$(TCASNMP_HOME)/include
 else
-    TCASNMP_HOME = /usr/local
+    TCASNMP_HOME = /usr
     INCLUDES    += -I$(TCASNMP_HOME)/include/tcasnmp
 endif
     LFLAGS += -L$(TCASNMP_HOME)/lib
@@ -99,7 +99,7 @@ ifdef TCAMAKE_PROJECT
     HEXESHOME = $(TCAMAKE_PROJECT)/libhexes
     INCLUDES += -I$(HEXESHOME)/include
 else
-    HEXESHOME = /usr/local
+    HEXESHOME = /usr
     INCLUDES += -I$(HEXESHOME)/include/hexes
 endif
     LFLAGS   += -L$(HEXESHOME)/lib
@@ -112,7 +112,7 @@ ifdef TCAMAKE_PROJECT
     TCAJSON_HOME = $(TCAMAKE_PROJECT)/tcajson
     INCLUDES   += -I$(TCAJSON_HOME)/include
 else
-    TCAJSON_HOME = /usr/local
+    TCAJSON_HOME = /usr
     INCLUDES   += -I$(TCAJSON_HOME)/include/tcajson
 endif
     LFLAGS  += -L$(TCAJSON_HOME)/lib
@@ -162,16 +162,6 @@ else
 endif
     LIBS        += -lrdkafka++ -lrdkafka -lsasl2 -lzstd
     MACROS      += -DRDKAFKA
-endif
-
-
-ifdef NEED_GSOAP
-ifdef TCAMAKE_PROJECT
-    GSOAP_DIR = $(TCAMAKE_PROJECT)/Common/gsoap-2.8/gsoap
-    #GSOAP_BIN = $(GSOAP_DIR)/bin/macosx
-    GSOAP_BIN = $(GSOAP_DIR)/bin/linux386
-    INCLUDES += -I${GSOAP_DIR}
-endif
 endif
 
 
