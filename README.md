@@ -12,19 +12,19 @@ It is not its own 'make' implementation. It simply wraps the use of
 Gnu 'automake' providing preset platform specific dependencies and
 environments.
 
-The goal is to provide a clean and simplified method of managing large
-project and sub-project dependencies in a common set of configurations
-which allows for cleaner and logical *Makefile*s.  
+The goal is to provide a clean and consistent method of managing large
+projects with sub-project dependencies in a common set of configurations
+which allows for logical *Makefile*s.  
 
-The system has been used reliably for years and serves as my excuse to
-avoid the GNU autoconf toolset when possible. While certainly not as
-powerful as the autoconf, the Makefile template hierarchy lends itself nicely
-as a build system mechanism or even in addition to the gnu autotools. It is
-surprisingly capable and even useful for managing a build environment
+The system has been used reliably for years and serves as an excuse to
+avoid the GNU *autoconf* toolset when possible. While certainly not as
+powerful as *autoconf*, the Makefile template hierarchy lends itself nicely
+as a simple build system mechanism, even when used in conjunction with 
+Gnu autotools. It is capable and even useful for managing a build environment
 for very large projects and multiple platforms.
 
 **tcamake** provides an *include* hierarchy that defines all of the
-dependencies of projects within the build system.
+dependencies of the projects within the build system.
 
 ## Layout (TCAMAKE_PROJECT):
 
@@ -38,9 +38,9 @@ An instance of the *tcamake* build environment should exist at the project
 workspace level or otherwise have TCAMAKE_HOME set accordingly.
 
 A given workspace project may consist of many sub-projects or repositories 
-that consist of dependencies. Each of these projects can refer to the build 
+with dependencies. Each of these projects can refer to the build 
 system via *TCAMAKE_HOME* and any given project Makefile should always include 
-*${TCAMAKE_HOME}/tcamake_include*. The include should occur **after** setting
+*${TCAMAKE_HOME}/tcamake_include*. The include must occur **after** setting
 various custom options or build overrides such as OPT_FLAGS, CFLAGS or CXXFLAGS,
 INCLUDES, LIBS, etc.
 
@@ -71,6 +71,9 @@ ALL_BINS=	$(BIN)
 
 # Include tcamake after all custom defines
 # ---------------
+ifeq($(TCAMAKE_HOME),)
+    export TCAMAKE_HOME := $(shell realpath ../tcamake)
+endif
 
 include $(TCAMAKE_HOME)/tcamake_include
 
@@ -101,9 +104,7 @@ endif
 ```
 
 Templates for these Makefiles are provided in the templates sub-directory
-and can be modified as needed. A given project can then have a default
-Makefile template installed by using the project init script:
-*tcamake_init_project.sh*.  
+and can be modified as needed. 
 
 
 ## Files:
@@ -133,8 +134,9 @@ The Makefile hierarchy includes the following files:
   dependencies before projects with the least dependencies.  
 
 - **tcamake_autodepend**  
-  An internal file for defining build 14sommands and is the last file included
-  by 'depends'. This file should NOT need to be modified.
+  An internal file for defining build commands and is the last file 
+  to be included by *tcamke_depends*. This file should NOT need to be 
+  modified.
 
 
 ## Scripts:
@@ -152,7 +154,3 @@ within a given project as needed.
   independently of the workspace. This script will assist in creating a
   project distribution by ensuring that links for needed dependencies
   such as 'tcamake' itself or other common libs are generated.
-
-- **tcamake_init_project.sh**  
-  Used to inititiate a new project within the workspace, providing
-  a base Makefile template.

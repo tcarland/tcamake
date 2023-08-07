@@ -24,6 +24,7 @@ ALL_BINS=	$(BIN)
 
 include $(TCAMAKE_HOME)/tcamake_include
 
+
 all: mybin
 
 mybin: $(OBJS)
