@@ -53,13 +53,13 @@ NEED_RDKAFKA = 1
 
 # Custom flags
 ifdef TCAMAKE_DEBUG
-OPT_FLAGS= 	-g
+OPT_FLAGS= -g
 endif
 
-CCSHARED +=  -Wl,-soname,$@
-CXXFLAGS =   -std=c++11
+CCSHARED+=  -Wl,-soname,$@
+CXXFLAGS=   -std=c++11
 
-INCLUDES=   -Iinclude
+INCLUDES= -Iinclude
 LIBS=
 
 # objects
