@@ -137,20 +137,3 @@ The Makefile hierarchy includes the following files:
   An internal file for defining build commands and is the last file 
   to be included by *tcamke_depends*. This file should NOT need to be 
   modified.
-
-
-## Scripts:
-
-A few scripts simply to assist in building or initializing projects.
-They make use of the Makefile templates found in the 'tcamake/template'
-directory which also serve as good examples.   
-
-The build script is intended to be useful in creating project
-distributions suitable for export ensuring common dependencies are linked
-within a given project as needed.  
-
-- **tcamake_build.sh**  
-  Some projects within the workspace may wish to be exported or built
-  independently of the workspace. This script will assist in creating a
-  project distribution by ensuring that links for needed dependencies
-  such as 'tcamake' itself or other common libs are generated.
