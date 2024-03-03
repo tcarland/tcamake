@@ -3,14 +3,13 @@
 #  This file is typically site customized for internal projects
 #  and dependencies.
 #
-
 ifndef TCAMAKE_DEPENDS
   TCAMAKE_DEPENDS=1
 endif
 
 # Global defines and compile options
 ifndef TCAMAKE_VERSION
-  include $(TCAMAKE_HOME)/tcamake/tcamake.Makefile
+  include $(TCAMAKE_HOME)/tcamake/tcamake_include
 endif
 
 #-------------------------------------------------------------------------
