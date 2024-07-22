@@ -15,9 +15,7 @@ endif
 #-------------------------------------------------------------------------
 #   Define requirements below
 #-------------------------------------------------------------------------
-
 # Common Libraries
-#
 
 ifdef NEED_TCAXMLPP
 ifdef TCAMAKE_PROJECT
@@ -212,17 +210,6 @@ endif
 
 ifdef NEED_SOCKET
     LIBS += $(LIB_SOCKET) $(LIB_NSL)
-endif
-
-ifdef NEED_BOOST_REGEXP
-    BOOST_HOME  = /usr
-    LFLAGS     += -L$(BOOST_HOME)/lib/boost-1_35
-    INCLUDES   += -I$(BOST_HOME)/include/boost-1_35
-ifdef NEED_PTHREADS
-    LIBS += -lboost_regex-mt
-else
-    LIBS += -lboost_regex
-endif
 endif
 
 ifdef NEED_LIBXML2_INCLUDE

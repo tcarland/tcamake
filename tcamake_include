@@ -45,7 +45,7 @@
 #                   delete a header file entirely.  You'll need to remove
 #                   the affected .d files to rebuild.
 #
-export TCAMAKE_VERSION="v24.03.03"
+export TCAMAKE_VERSION="v24.07.22"
 
 ifndef TCAMAKE_ENV
     include $(TCAMAKE_HOME)/tcamake_env
@@ -57,7 +57,7 @@ RM = rm -rf
 CP = cp --preserve=all --recursive
 MKDIR = mkdir -p
 RSYNC = rsync -av
-RDIST = rsync -avL --delete --exclude=.git --exclude=.svn --exclude=.cvs
+RDIST = rsync -avCL --delete 
 PANDOC = pandoc -s
 
 CXX = g++
