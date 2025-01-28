@@ -19,9 +19,10 @@ retval=0
 
 if [ -z "$TCAMAKE_HOME" ]; then
     if [ -n "$TCAMAKE_PROJECT" ]; then
-        TCAMAKE_HOME="$TCAMAKE_PROJECT/tcamake"
+        export TCAMAKE_HOME="${TCAMAKE_PROJECT}/tcamake"
     else
-        TCAMAKE_HOME="../tcamake"
+        export TCAMAKE_PROJECT=$(realpath ..)
+        TCAMAKE_HOME="${TCAMAKE_PROJECT}/tcamake"
     fi
 fi
 
@@ -33,7 +34,7 @@ fi
 
 usage="
 Creates a distribution directory that includes links to
-any additional project paths needed.
+additional project paths as needed.
 
 Unrecognized commands are passed through to 'make'.
 
@@ -45,10 +46,10 @@ Synopsis:
   $PNAME [-hn] [command] {args} 
 
 Options:
-  [command]   :  a standard 'make' target or a build command
+  [command]        :  a standard 'make' target or a build command
 
-  -h|--help   : displays this help
-  -n|--dryrun : enables dry-run test mode
+  -h|--help        : displays this help
+  -n|--dryrun      : enables dry-run test mode
 
   'dist' [project] : Creates a distribution copy in the provided path. 
   'link'           : Creates project build links only

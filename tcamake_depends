@@ -9,7 +9,7 @@ endif
 
 # Global defines and compile options
 ifndef TCAMAKE_VERSION
-  include $(TCAMAKE_HOME)/tcamake/tcamake_include
+  include $(TCAMAKE_PROJECT)/tcamake/tcamake_include
 endif
 
 #-------------------------------------------------------------------------
