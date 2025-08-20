@@ -12,7 +12,7 @@ endif
 
 OPT_FLAGS +=	    -fPIC -O2
 CCSHARED  +=	    -Wl,-soname,$@
-CXXFLAGS   =        -std=c++0x
+CXXFLAGS   =        -std=c++-23
 
 # custom include/libs
 INCLUDES =	    -Iinclude
@@ -26,7 +26,18 @@ ALL_OBJS =	    $(OBJS) $(TEST_OBJS)
 ALL_BINS = 	    $(BIN)
 
 
+# ---------------------------------------------
+
+ifeq ($(TCAMAKE_HOME),)
+	export TCAMAKE_HOME := $(shell realpath ../tcamake)
+endif
+ifeq ($(TCAMAKE_PROJECT),)
+	export TCAMAKE_PROJECT := $(shell realpath ..)
+endif
+
 include ${TCAMAKE_HOME}/tcamake_include
+
+# ---------------------------------------------
 
 
 all: lib
@@ -47,9 +58,9 @@ lib/libmylib.so.0.0.1: ${OBJS}
 	( mv $@ lib/; cd lib; ln -s $@ libmylib.so )
 	@echo
 
-.PHONY: docs 
+.PHONY: docs
 docs: documentation
-pdf: documentation 
+pdf: documentation
 
 documentation:
 	(cd docs; ${MAKE} ${MFLAGS} ${MVARS} all )

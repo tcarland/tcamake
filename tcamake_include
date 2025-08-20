@@ -7,10 +7,10 @@
 #
 # $(TCAMAKE_HOME) should be set by the source Makefile.
 #
-# Definitions provided by the Makefile should be defined *prior* to the 
+# Definitions provided by the Makefile should be defined *prior* to the
 # include statement to include this file.
 #
-# Additional customization via the typical variables described below 
+# Additional customization via the typical variables described below
 # should also be set prior to including this file.
 #
 #   L_TARGET:    A library target
@@ -29,7 +29,7 @@
 #                dependency files should be read.
 #   ALL_BINS:    All binary targets outside of T_TARGETS and TXX_TARGETS
 #                that dependencies should be read for.
-#   AFL_DEBUG:   Enable compiliation with the AFL fuzzer. 
+#   AFL_DEBUG:   Enable compiliation with the AFL fuzzer.
 #
 # Macros the Makefile should use when defining custom rules:
 #
@@ -45,7 +45,7 @@
 #                   delete a header file entirely.  You'll need to remove
 #                   the affected .d files to rebuild.
 #
-export TCAMAKE_VERSION="v25.01.28"
+export TCAMAKE_VERSION="v25.08.20"
 
 ifndef TCAMAKE_ENV
     include $(TCAMAKE_HOME)/tcamake_env
@@ -57,7 +57,7 @@ RM = rm -rf
 CP = cp --preserve=all --recursive
 MKDIR = mkdir -p
 RSYNC = rsync -av
-RDIST = rsync -avCL --delete 
+RDIST = rsync -avCL --delete
 PANDOC = pandoc -s
 
 CXX = g++
