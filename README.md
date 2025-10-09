@@ -1,8 +1,8 @@
 tcamake
 =======
 
-***Author***  tcarland@gmail.com  
-***Version***  25.01.28
+Author  Timothy C. Arland <tcarland at gmail dot com>  
+Version v25.10.10
 
 
 ## Overview:
