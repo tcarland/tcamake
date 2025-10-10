@@ -25,6 +25,14 @@ BIN =		    mylibtest
 ALL_OBJS =	    $(OBJS) $(TEST_OBJS)
 ALL_BINS = 	    $(BIN)
 
+#-------------------
+
+ifeq ($(TCAMAKE_HOME),)
+	export TCAMAKE_HOME := $(shell realpath ../tcamake)
+endif
+ifeq ($(TCAMAKE_PROJECT),)
+	export TCAMAKE_PROJECT := $(shell realpath ..)
+endif
 
 # ---------------------------------------------
 
@@ -37,8 +45,7 @@ endif
 
 include ${TCAMAKE_HOME}/tcamake_include
 
-# ---------------------------------------------
-
+#-------------------
 
 all: lib
 

@@ -1,8 +1,5 @@
 #   tcamake_environment - platform CFLAGS
 #
-#   Timothy C. Arland <tcarland@gmail.com>
-#
-
 TCAMAKE_PORT_OS         := $(shell uname)
 TCAMAKE_PORT_MACHINE    := $(shell uname -m)
 TCAMAKE_PORT_IDENTIFIER := "$(TCAMAKE_PORT_OS)_$(TCAMAKE_PORT_MACHINE)"

@@ -255,10 +255,6 @@ ifdef NEED_LZ4
     LIBS += -llz4
 endif 
 
-ifdef NEED_ZIPSTREAM
-    INCLUDES += -I$(TCAMAKE_PROJECT)/Common/zipstream
-endif
-
 #-------------------------------------------------------------------------
 ## Do not edit below this line
 ifndef TCAMAKE_AUTODEPEND
