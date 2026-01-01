@@ -1,5 +1,7 @@
 # tcamake/tcamake_include
 #
+# Copyright(c) 2002-2026 Timothy C. Arland <tcarland@gmail.com>
+#
 #   A complete 'Makefile' build environment for including platform
 # dependencies.
 #
@@ -45,7 +47,7 @@
 #                   delete a header file entirely.  You'll need to remove
 #                   the affected .d files to rebuild.
 #
-export TCAMAKE_VERSION="v25.10.10"
+export TCAMAKE_VERSION="v26.01.01"
 
 ifndef TCAMAKE_ENV
     include $(TCAMAKE_HOME)/tcamake_env
