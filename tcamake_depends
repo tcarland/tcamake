@@ -240,7 +240,7 @@ ifdef NEED_LIBCURL_INCLUDE
 endif
 
 ifdef NEED_LIBCURL
-	LIBS   += -lcurl
+	LIBS += -lcurl
 endif
 
 ifdef NEED_ZLIB_INCLUDE
@@ -254,6 +254,11 @@ endif
 ifdef NEED_LZ4
     LIBS += -llz4
 endif 
+
+ifdef NEED_TAGLIB
+    INCLUDES += $(shell pkg-config --cflags taglib)
+    LIBS     += $(shell pkg-config --libs taglib)
+endif
 
 #-------------------------------------------------------------------------
 ## Do not edit below this line

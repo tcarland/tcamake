@@ -15,7 +15,6 @@ PTHREAD_CFLAGS=
 ifeq ($(TCAMAKE_PORT_IDENTIFIER), "SunOS_sun4u")
   CFLAGS_ADD     = -DTCA_PORT_SOLARIS_SPARC
   EMANATE_OS     = -DSOLARIS
-  EMANATE_os     = solaris_sun4
   LIB_SOCKET     = -lsocket
   LIB_NSL        = -lnsl
   LIB_PTHREAD    = -lpthread
@@ -27,7 +26,6 @@ endif
 ifeq ($(TCAMAKE_PORT_IDENTIFIER), "Linux_i686")
   CFLAGS_ADD     = -DTCA_PORT_LINUX_INTEL32
   EMANATE_OS     = -DLINUX
-  EMANATE_os     = linux
   LIB_PTHREAD    = -lpthread
   PTHREAD_CFLAGS = -pthread
   LIB_DL         = -ldl
@@ -37,7 +35,6 @@ endif
 ifeq ($(TCAMAKE_PORT_IDENTIFIER), "Linux_x86_64")
   CFLAGS_ADD     = -DTCA_PORT_LINUX_INTEL64
   EMANATE_OS     = -DLINUX
-  EMANATE_os     = linux
   LIB_PTHREAD    = -lpthread
   PTHREAD_CFLAGS = -pthread
   LIB_DL         = -ldl
@@ -48,7 +45,6 @@ endif
 ifeq ($(TCAMAKE_PORT_IDENTIFIER), "Linux_ia64")
   CFLAGS_ADD     = -DTCA_PORT_LINUX_IA64
   EMANATE_OS     = -DLINUX
-  EMANATE_os     = linux
   LIB_PTHREAD    = -lpthread
   PTHREAD_CFLAGS = -pthread
   LIB_DL         = -ldl
@@ -58,7 +54,6 @@ endif
 ifeq ($(TCAMAKE_PORT_IDENTIFIER), "Darwin_i386")
   CFLAGS_ADD     = -DTCA_PORT_DARWIN_I386
   EMANATE_OS     = -DDARWIN
-  EMANATE_os     = darwin
   LIB_PTHREAD    = -lpthread
   PTHREAD_CFLAGS = -pthread
   CXXFLAGS_ADD   = -stdlib=libstdc++
@@ -68,7 +63,6 @@ endif
 ifeq ($(TCAMAKE_PORT_IDENTIFIER), "Darwin_x86_64")
   CFLAGS_ADD     = -DTCA_PORT_DARWIN_INTEL64
   EMANATE_OS     = -DDARWIN
-  EMANATE_os     = darwin
   LIB_PTHREAD    = -lpthread
   PTHREAD_CFLAGS = -pthread
   CXXFLAGS_ADD   = -stdlib=libstdc++
@@ -77,6 +71,7 @@ endif
 # set defaults for freebsd
 ifeq ($(TCAMAKE_PORT_IDENTIFIER), "FreeBSD_i386")
   CFLAGS_ADD     = -DTCA_PORT_FREEBSD_INTEL
+  EMANATE_OS     = -DFREEBSD
   PTHREAD_CFLAGS = -pthread
 endif
 

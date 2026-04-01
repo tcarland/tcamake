@@ -46,7 +46,7 @@ Synopsis:
   $PNAME [-hn] [command] {args} 
 
 Options:
-  [command]        :  a standard 'make' target or a build command
+  [command]        : A 'make' target or a build command
 
   -h|--help        : displays this help
   -n|--dryrun      : enables dry-run test mode
@@ -55,7 +55,7 @@ Options:
   'link'           : Creates project build links only
   'unlink'         : Removes build links only
   'clean'          : Removes build links and runs 'make clean'
-  'show'           : shows the determined project root and 
+  'show'           : Shows the determined project root and 
                      what links would be created. (dry run) 
 "
 
