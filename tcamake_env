@@ -11,17 +11,6 @@ LIB_PTHREAD=
 LIB_DL=
 PTHREAD_CFLAGS=
 
-# set defaults for solaris sparc
-ifeq ($(TCAMAKE_PORT_IDENTIFIER), "SunOS_sun4u")
-  CFLAGS_ADD     = -DTCA_PORT_SOLARIS_SPARC
-  EMANATE_OS     = -DSOLARIS
-  LIB_SOCKET     = -lsocket
-  LIB_NSL        = -lnsl
-  LIB_PTHREAD    = -lpthread
-  PTHREAD_CFLAGS = -pthread
-  LIB_DL         = -ldl
-endif
-
 # set defaults for linux intel x86
 ifeq ($(TCAMAKE_PORT_IDENTIFIER), "Linux_i686")
   CFLAGS_ADD     = -DTCA_PORT_LINUX_INTEL32
@@ -39,15 +28,6 @@ ifeq ($(TCAMAKE_PORT_IDENTIFIER), "Linux_x86_64")
   PTHREAD_CFLAGS = -pthread
   LIB_DL         = -ldl
   PTHREAD_CFLAGS = -pthread
-endif
-
-# set defaults for linux intel itanium
-ifeq ($(TCAMAKE_PORT_IDENTIFIER), "Linux_ia64")
-  CFLAGS_ADD     = -DTCA_PORT_LINUX_IA64
-  EMANATE_OS     = -DLINUX
-  LIB_PTHREAD    = -lpthread
-  PTHREAD_CFLAGS = -pthread
-  LIB_DL         = -ldl
 endif
 
 # set defaults for mac os x32
