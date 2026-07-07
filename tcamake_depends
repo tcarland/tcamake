@@ -107,13 +107,25 @@ endif
 ifdef NEED_TCAJSON
 ifdef TCAMAKE_PROJECT
     TCAJSON_HOME = $(TCAMAKE_PROJECT)/tcajson
-    INCLUDES   += -I$(TCAJSON_HOME)/include
+    INCLUDES    += -I$(TCAJSON_HOME)/include
 else
     TCAJSON_HOME = /usr
-    INCLUDES   += -I$(TCAJSON_HOME)/include/tcajson
+    INCLUDES    += -I$(TCAJSON_HOME)/include/tcajson
 endif
     LFLAGS  += -L$(TCAJSON_HOME)/lib
     LIBS    += -ltcajson
+endif
+
+ifdef NEED_TRINOCPP
+ifdef TCAMAKE_PROJECT
+    TRINOCPP_HOME = $(TCAMAKE_PROJECT)/trino-cpp
+    INCLUDES     += -I$(TRINOCPP_HOME)/include
+else
+    TRINOCPP_HOME = /usr
+    INCLUDES     += -I$(TRINOCPP_HOME)/include/trino-cpp
+endif
+    LFLAGS       += -L$(TRINO_CPP_HOME)/lib
+    LIBS         += -ltrinoquery
 endif
 
 #-------------------------------------------------------------------------

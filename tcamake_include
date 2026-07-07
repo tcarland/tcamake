@@ -47,7 +47,7 @@
 #                   delete a header file entirely.  You'll need to remove
 #                   the affected .d files to rebuild.
 #
-export TCAMAKE_VERSION="v26.06.01"
+export TCAMAKE_VERSION="v26.07.07"
 
 ifndef TCAMAKE_ENV
     include $(TCAMAKE_HOME)/tcamake_env

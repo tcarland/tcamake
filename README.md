@@ -2,7 +2,7 @@ tcamake
 =======
 
 Author  Timothy C. Arland <tcarland at gmail dot com>  
-Version v26.06.01
+Version v26.07.07
 
 ## Overview:
 
